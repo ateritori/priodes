@@ -2,12 +2,20 @@
 
 namespace App\Controllers;
 
+use App\Models\kriteriaModel;
+
 class Admin extends BaseController
 {
+    protected $kriteriaModel;
+    public function __construct()
+    {
+        $this->kriteriaModel = new kriteriaModel();
+    }
+
     public function index()
     {
         $data = [
-            'judul' => 'SPK-Priodes Kalurahan Wonosari',
+            'judul' => 'Beranda - Wonosari',
         ];
 
         return view('admin/index', $data);
@@ -15,10 +23,21 @@ class Admin extends BaseController
 
     public function kriteria()
     {
+        $dataKriteria = $this->kriteriaModel->findAll();
         $data = [
-            'judul' => 'SPK-Priodes Kalurahan Wonosari',
+            'judul' => 'Kriteria - Wonosari',
+            'kriteria' => $dataKriteria
         ];
 
         return view('admin/kriteria', $data);
+    }
+
+    public function tambah()
+    {
+        $data = [
+            'judul' => 'Tambah Kriteria - Wonosari',
+        ];
+
+        return view('admin/tambah', $data);
     }
 }

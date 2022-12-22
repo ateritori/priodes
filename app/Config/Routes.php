@@ -37,6 +37,7 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Admin::index');
 $routes->get('/kriteria', 'Admin::kriteria');
+$routes->get('/kriteria/tambah', 'Admin::tambah');
 
 /*
  * --------------------------------------------------------------------
