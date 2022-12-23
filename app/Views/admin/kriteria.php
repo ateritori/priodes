@@ -4,6 +4,11 @@
     <div class="bg-light p-5 rounded">
         <h1>Kriteria</h1>
         <p class="lead"><a class="btn btn-primary" href="<?= base_url(); ?>/kriteria/tambah" role="button">Tambah Kriteria</a></p>
+        <?php if (session()->getFlashdata('notif')) : ?>
+            <p class="alert alert-success" role="alert">
+                Data Kriteria Berhasil Disimpan
+            </p>
+        <?php endif; ?>
         <table class="table table-striped">
             <thead>
                 <tr>

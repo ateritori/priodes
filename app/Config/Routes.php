@@ -38,6 +38,7 @@ $routes->set404Override();
 $routes->get('/', 'Admin::index');
 $routes->get('/kriteria', 'Admin::kriteria');
 $routes->get('/kriteria/tambah', 'Admin::tambah');
+$routes->get('/kriteria/simpan', 'Admin::simpan');
 
 /*
  * --------------------------------------------------------------------
