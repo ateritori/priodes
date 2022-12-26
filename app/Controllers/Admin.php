@@ -2,14 +2,16 @@
 
 namespace App\Controllers;
 
-use App\Models\kriteriaModel;
+use App\Models\KriteriaModel;
+use App\Models\SubkriteriaModel;
 
 class Admin extends BaseController
 {
-    protected $kriteriaModel;
+    protected $KriteriaModel;
     public function __construct()
     {
-        $this->kriteriaModel = new kriteriaModel();
+        $this->KriteriaModel = new KriteriaModel();
+        $this->SubkriteriaModel = new SubkriteriaModel();
     }
 
     public function index()
@@ -23,10 +25,9 @@ class Admin extends BaseController
 
     public function kriteria()
     {
-        $dataKriteria = $this->kriteriaModel->findAll();
         $data = [
             'judul' => 'Kriteria - Wonosari',
-            'kriteria' => $dataKriteria
+            'kriteria' => $this->KriteriaModel->getKriteria()
         ];
 
         return view('admin/kriteria', $data);
@@ -57,11 +58,22 @@ class Admin extends BaseController
             $validation = \Config\Services::validation();
             return redirect()->to(base_url('kriteria/tambah'))->withInput()->with('validation', $validation);
         }
-        $this->kriteriaModel->save([
+        $this->KriteriaModel->save([
             'nama_kriteria' => $this->request->getVar('namaKriteria'),
             'status_kriteria' => 1
         ]);
         session()->setFlashdata('notif', 'Data Kriteria Berhasil Ditambahkan');
         return redirect()->to(base_url('kriteria'));
+    }
+
+    public function subKriteria($idKriteria)
+    {
+        $data = [
+            'judul' => 'Kriteria - Wonosari',
+            'kriteria' => $this->KriteriaModel->getKriteria($idKriteria),
+            'subKriteria' => $this->SubkriteriaModel->getSubkriteria($idKriteria)
+        ];
+
+        return view('admin/subkriteria', $data);
     }
 }

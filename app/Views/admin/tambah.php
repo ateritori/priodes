@@ -11,7 +11,7 @@
                     <?= $validation->getError('namaKriteria'); ?>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
             <a class="btn btn-secondary" href="<?= base_url(); ?>/kriteria">Kembali</a>
         </form>
     </div>

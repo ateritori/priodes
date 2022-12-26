@@ -39,6 +39,7 @@ $routes->get('/', 'Admin::index');
 $routes->get('/kriteria', 'Admin::kriteria');
 $routes->get('/kriteria/tambah', 'Admin::tambah');
 $routes->get('/kriteria/simpan', 'Admin::simpan');
+$routes->get('/kriteria/sub/(:segment)', 'Admin::subkriteria/$1');
 
 /*
  * --------------------------------------------------------------------

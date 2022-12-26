@@ -4,12 +4,12 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class KriteriaModel extends Model
+class SubkriteriaModel extends Model
 {
-    protected $table      = 'kriteria';
-    protected $primaryKey = 'id_kriteria';
+    protected $table      = 'sub_kriteria';
+    protected $primaryKey = 'id_sub_kriteria';
     protected $useAutoIncrement = true;
-    protected $allowedFields = ['nama_kriteria', 'status_kriteria'];
+    protected $allowedFields = ['nama_sub_kriteria', 'status_sub_kriteria', 'bobot_sub_kriteria'];
     // protected $returnType     = 'array';
     // protected $useSoftDeletes = true;
 
@@ -37,11 +37,11 @@ class KriteriaModel extends Model
     // protected $beforeDelete   = [];
     // protected $afterDelete    = [];
 
-    public function getKriteria($idKriteria = false)
+    public function getSubkriteria($idKriteria = false)
     {
         if ($idKriteria == false) {
             return $this->findAll();
         }
-        return $this->where(['id_kriteria' => $idKriteria])->first();
+        return $this->where(['id_kriteria' => $idKriteria])->findAll();
     }
 }
