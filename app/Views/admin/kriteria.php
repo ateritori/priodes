@@ -6,7 +6,7 @@
         <p class="lead"><a class="btn btn-primary btn-sm" href="<?= base_url(); ?>/kriteria/tambah" role="button"><i class="fa-solid fa-plus"></i> Kriteria</a></p>
         <?php if (session()->getFlashdata('notif')) : ?>
             <p class="alert alert-success" role="alert">
-                Data Kriteria Berhasil Disimpan
+                <?= session()->getFlashdata('notif') ?>
             </p>
         <?php endif; ?>
         <table class="table table-striped">
@@ -39,7 +39,7 @@
                         </td>
                         <td>
                             <a href="<?= base_url(); ?>/kriteria/sub/<?= $krt['id_kriteria'] ?>"><i class="fa-solid fa-wave-square" style="color: green;"></i></a>
-                            <a href="#"><i class="fas fa-edit" style="color: orange;"></i></a>
+                            <a href="<?= base_url(); ?>/kriteria/edit/<?= $krt['id_kriteria'] ?>"><i class="fas fa-edit" style="color: orange;"></i></a>
                             <a href="#"><i class="fas fa-trash" style="color: red;"></i></a>
                         </td>
                     </tr>

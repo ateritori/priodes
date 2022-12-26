@@ -69,11 +69,46 @@ class Admin extends BaseController
     public function subKriteria($idKriteria)
     {
         $data = [
-            'judul' => 'Kriteria - Wonosari',
+            'judul' => 'Sub Kriteria - Wonosari',
             'kriteria' => $this->KriteriaModel->getKriteria($idKriteria),
             'subKriteria' => $this->SubkriteriaModel->getSubkriteria($idKriteria)
         ];
 
         return view('admin/subkriteria', $data);
+    }
+
+    public function edit($idKriteria)
+    {
+        $data = [
+            'judul' => 'Kriteria - Wonosari',
+            'kriteria' => $this->KriteriaModel->getKriteria($idKriteria),
+            'validation' => \Config\Services::validation()
+        ];
+
+        return view('admin/edit', $data);
+    }
+
+    public function update($idKriteria)
+    {
+        if (!$this->validate([
+            'namaKriteria' =>  [
+                'rules' => 'required|is_unique[kriteria.nama_kriteria]',
+                'errors' => [
+                    'required' => 'Nama Kriteria Harus Diisi',
+                    'is_unique' => 'Nama Kriteria Sudah Ada'
+                ]
+            ]
+
+        ])) {
+            $validation = \Config\Services::validation();
+            return redirect()->to(base_url('kriteria/edit/' . $idKriteria))->withInput()->with('validation', $validation)->with('idKriteria', $idKriteria);
+        }
+        $data = [
+            'nama_kriteria' => $this->request->getVar('namaKriteria'),
+        ];
+        $this->KriteriaModel->update($idKriteria, $data);
+
+        session()->setFlashdata('notif', 'Data Kriteria Berhasil Diubah');
+        return redirect()->to(base_url('kriteria'));
     }
 }

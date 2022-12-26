@@ -40,6 +40,8 @@ $routes->get('/kriteria', 'Admin::kriteria');
 $routes->get('/kriteria/tambah', 'Admin::tambah');
 $routes->get('/kriteria/simpan', 'Admin::simpan');
 $routes->get('/kriteria/sub/(:segment)', 'Admin::subkriteria/$1');
+$routes->get('/kriteria/edit/(:segment)', 'Admin::edit/$1');
+$routes->get('/kriteria/update/(:segment)', 'Admin::update/$1');
 
 /*
  * --------------------------------------------------------------------
