@@ -39,9 +39,13 @@ $routes->get('/', 'Admin::index');
 $routes->get('/kriteria', 'Admin::kriteria');
 $routes->get('/kriteria/tambah', 'Admin::tambah');
 $routes->get('/kriteria/simpan', 'Admin::simpan');
-$routes->get('/kriteria/sub/(:segment)', 'Admin::subkriteria/$1');
-$routes->get('/kriteria/edit/(:segment)', 'Admin::edit/$1');
-$routes->get('/kriteria/update/(:segment)', 'Admin::update/$1');
+$routes->get('/kriteria/sub/(:num)', 'Admin::subkriteria/$1');
+$routes->get('/kriteria/edit/(:num)', 'Admin::edit/$1');
+$routes->get('/kriteria/update/(:num)', 'Admin::update/$1');
+$routes->delete('/kriteria/hapus/(:num)', 'Admin::hapus/$1');
+$routes->get('/kriteria/tambahsub/(:num)', 'Admin::tambahsub/$1');
+$routes->get('/kriteria/simpansub/(:num)', 'Admin::simpansub/$1');
+$routes->get('/kriteria/sub/edit/(:num)', 'Admin::editsub/$1');
 
 /*
  * --------------------------------------------------------------------

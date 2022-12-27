@@ -10,6 +10,7 @@ class Admin extends BaseController
     protected $KriteriaModel;
     public function __construct()
     {
+        date_default_timezone_set('Asia/Jakarta');
         $this->KriteriaModel = new KriteriaModel();
         $this->SubkriteriaModel = new SubkriteriaModel();
     }
@@ -60,7 +61,7 @@ class Admin extends BaseController
         }
         $this->KriteriaModel->save([
             'nama_kriteria' => $this->request->getVar('namaKriteria'),
-            'status_kriteria' => 1
+            'deskripsi_kriteria' => $this->request->getVar('deskripsiKriteria')
         ]);
         session()->setFlashdata('notif', 'Data Kriteria Berhasil Ditambahkan');
         return redirect()->to(base_url('kriteria'));
@@ -90,25 +91,74 @@ class Admin extends BaseController
 
     public function update($idKriteria)
     {
-        if (!$this->validate([
-            'namaKriteria' =>  [
-                'rules' => 'required|is_unique[kriteria.nama_kriteria]',
-                'errors' => [
-                    'required' => 'Nama Kriteria Harus Diisi',
-                    'is_unique' => 'Nama Kriteria Sudah Ada'
-                ]
-            ]
-
-        ])) {
-            $validation = \Config\Services::validation();
-            return redirect()->to(base_url('kriteria/edit/' . $idKriteria))->withInput()->with('validation', $validation)->with('idKriteria', $idKriteria);
-        }
         $data = [
             'nama_kriteria' => $this->request->getVar('namaKriteria'),
+            'deskripsi_kriteria' => $this->request->getVar('deskripsiKriteria'),
         ];
         $this->KriteriaModel->update($idKriteria, $data);
 
         session()->setFlashdata('notif', 'Data Kriteria Berhasil Diubah');
         return redirect()->to(base_url('kriteria'));
+    }
+
+    public function hapus($idKriteria)
+    {
+        $this->KriteriaModel->delete($idKriteria);
+        session()->setFlashdata('notif', 'Data Kriteria Berhasil Dihapus');
+        return redirect()->to(base_url('kriteria'));
+    }
+
+    public function tambahsub($idKriteria)
+    {
+        $data = [
+            'judul' => 'Tambah Sub-Kriteria - Wonosari',
+            'kriteria' => $this->KriteriaModel->getKriteria($idKriteria),
+            'subKriteria' => $this->SubkriteriaModel->getSubkriteria($idKriteria),
+            'validation' => \Config\Services::validation()
+        ];
+
+        return view('admin/tambahsub', $data);
+    }
+
+    public function simpansub($idKriteria)
+    {
+        if (!$this->validate([
+            'namaSubkriteria' =>  [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Nama Sub-Kriteria Harus Diisi',
+                ]
+            ],
+            'bobotSubkriteria' =>  [
+                'rules' => 'required|numeric|less_than[11]',
+                'errors' => [
+                    'required' => 'Bobot Sub-Kriteria Harus Diisi',
+                    'numeric' => 'Bobot Sub-Kriteria Harus Berupa Angka',
+                    'less_than' => 'Bobot Sub-Kriteria Harus Diantara 1-10',
+                ]
+            ]
+
+        ])) {
+            $validation = \Config\Services::validation();
+            return redirect()->to(base_url('kriteria/tambahsub/' . $idKriteria))->withInput()->with('validation', $validation);
+        }
+        $this->SubkriteriaModel->save([
+            'nama_sub_kriteria' => $this->request->getVar('namaSubkriteria'),
+            'bobot_sub_kriteria' => $this->request->getVar('bobotSubkriteria'),
+            'id_kriteria' => $idKriteria
+        ]);
+        session()->setFlashdata('notif', 'Data Sub Kriteria Berhasil Ditambahkan');
+        return redirect()->to(base_url('kriteria/sub/' . $idKriteria));
+    }
+
+    public function editsub($idSubkriteria)
+    {
+        $data = [
+            'judul' => 'Edit Sub-Kriteria - Wonosari',
+            'subKriteria' => $this->SubkriteriaModel->getSub($idSubkriteria),
+            'validation' => \Config\Services::validation()
+        ];
+
+        return view('admin/editsub', $data);
     }
 }

@@ -9,16 +9,16 @@ class KriteriaModel extends Model
     protected $table      = 'kriteria';
     protected $primaryKey = 'id_kriteria';
     protected $useAutoIncrement = true;
-    protected $allowedFields = ['nama_kriteria', 'status_kriteria'];
+    protected $allowedFields = ['nama_kriteria', 'status_kriteria', 'deskripsi_kriteria'];
     // protected $returnType     = 'array';
-    // protected $useSoftDeletes = true;
+    protected $useSoftDeletes = true;
 
-    // // Dates
-    // protected $useTimestamps = false;
-    // protected $dateFormat    = 'datetime';
-    // protected $createdField  = 'created_at';
-    // protected $updatedField  = 'updated_at';
-    // protected $deletedField  = 'deleted_at';
+    // Dates
+    protected $useTimestamps = true;
+    protected $dateFormat    = 'datetime';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+    protected $deletedField  = 'deleted_at';
 
     // // Validation
     // protected $validationRules      = [];

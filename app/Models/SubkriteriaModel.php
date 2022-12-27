@@ -9,16 +9,16 @@ class SubkriteriaModel extends Model
     protected $table      = 'sub_kriteria';
     protected $primaryKey = 'id_sub_kriteria';
     protected $useAutoIncrement = true;
-    protected $allowedFields = ['nama_sub_kriteria', 'status_sub_kriteria', 'bobot_sub_kriteria'];
+    protected $allowedFields = ['nama_sub_kriteria', 'bobot_sub_kriteria', 'id_kriteria'];
     // protected $returnType     = 'array';
-    // protected $useSoftDeletes = true;
+    protected $useSoftDeletes = true;
 
     // // Dates
-    // protected $useTimestamps = false;
-    // protected $dateFormat    = 'datetime';
-    // protected $createdField  = 'created_at';
-    // protected $updatedField  = 'updated_at';
-    // protected $deletedField  = 'deleted_at';
+    protected $useTimestamps = true;
+    protected $dateFormat    = 'datetime';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+    protected $deletedField  = 'deleted_at';
 
     // // Validation
     // protected $validationRules      = [];
@@ -43,5 +43,13 @@ class SubkriteriaModel extends Model
             return $this->findAll();
         }
         return $this->where(['id_kriteria' => $idKriteria])->findAll();
+    }
+
+    public function getSub($idSubkriteria = false)
+    {
+        if ($idSubkriteria == false) {
+            return $this->findAll();
+        }
+        return $this->where(['id_sub_kriteria' => $idSubkriteria])->first();
     }
 }
