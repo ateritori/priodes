@@ -40,7 +40,8 @@
                             <form action="<?= base_url(); ?>/kriteria/sub/hapus/<?= $subK['id_sub_kriteria'] ?>" method="POST" class="d-inline">
                                 <?= csrf_field(); ?>
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda Yakin Menghapus Kriteria?');"><i class="fas fa-trash"></i></button>
+                                <input type="hidden" name="idKriteria" value="<?= $subK['id_kriteria']; ?>">
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda Yakin Menghapus Data Sub-Kriteria?');"><i class="fas fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>

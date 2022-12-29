@@ -161,4 +161,45 @@ class Admin extends BaseController
 
         return view('admin/editsub', $data);
     }
+
+    public function savesub($idSubkriteria)
+    {
+        $idKriteria = $this->request->getVar('idKriteria');
+        if (!$this->validate([
+            'namaSubkriteria' =>  [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Nama Sub-Kriteria Harus Diisi',
+                ]
+            ],
+            'bobotSubkriteria' =>  [
+                'rules' => 'required|numeric|less_than[11]',
+                'errors' => [
+                    'required' => 'Bobot Sub-Kriteria Harus Diisi',
+                    'numeric' => 'Bobot Sub-Kriteria Harus Berupa Angka',
+                    'less_than' => 'Bobot Sub-Kriteria Harus Diantara 1-10',
+                ]
+            ]
+
+        ])) {
+            $validation = \Config\Services::validation();
+            return redirect()->to(base_url('kriteria/sub/edit/' . $idSubkriteria))->withInput()->with('validation', $validation);
+        }
+        $data = [
+            'nama_sub_kriteria' => $this->request->getVar('namaSubkriteria'),
+            'bobot_sub_kriteria' => $this->request->getVar('bobotSubkriteria'),
+        ];
+        $this->SubkriteriaModel->update($idSubkriteria, $data);
+
+        session()->setFlashdata('notif', 'Data Sub Kriteria Berhasil Diubah');
+        return redirect()->to(base_url('kriteria/sub/' . $idKriteria));
+    }
+
+    public function hapussub($idSubkriteria)
+    {
+        $idKriteria = $this->request->getVar('idKriteria');
+        $this->SubkriteriaModel->delete($idSubkriteria);
+        session()->setFlashdata('notif', 'Data Kriteria Berhasil Dihapus');
+        return redirect()->to(base_url('kriteria/sub/' . $idKriteria));
+    }
 }

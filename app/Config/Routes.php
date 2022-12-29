@@ -46,6 +46,8 @@ $routes->delete('/kriteria/hapus/(:num)', 'Admin::hapus/$1');
 $routes->get('/kriteria/tambahsub/(:num)', 'Admin::tambahsub/$1');
 $routes->get('/kriteria/simpansub/(:num)', 'Admin::simpansub/$1');
 $routes->get('/kriteria/sub/edit/(:num)', 'Admin::editsub/$1');
+$routes->get('/kriteria/sub/editsub/(:num)', 'Admin::savesub/$1');
+$routes->delete('/kriteria/sub/hapus/(:num)', 'Admin::hapussub/$1');
 
 /*
  * --------------------------------------------------------------------
