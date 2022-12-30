@@ -49,6 +49,8 @@ $routes->get('/kriteria/sub/edit/(:num)', 'Admin::editsub/$1');
 $routes->get('/kriteria/sub/editsub/(:num)', 'Admin::savesub/$1');
 $routes->delete('/kriteria/sub/hapus/(:num)', 'Admin::hapussub/$1');
 
+$routes->get('/alternatif', 'Umum::index');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

@@ -15,7 +15,7 @@
                     <a class="nav-link" href="<?= base_url(); ?>/kriteria">Kriteria</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Alternatif</a>
+                    <a class="nav-link" href="<?= base_url(); ?>/alternatif">Alternatif</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Penilaian</a>
