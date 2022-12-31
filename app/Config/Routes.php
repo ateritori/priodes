@@ -50,6 +50,8 @@ $routes->get('/kriteria/sub/editsub/(:num)', 'Admin::savesub/$1');
 $routes->delete('/kriteria/sub/hapus/(:num)', 'Admin::hapussub/$1');
 
 $routes->get('/alternatif', 'Umum::index');
+$routes->get('/alternatif/tambah', 'Umum::tambah_alternatif');
+$routes->get('/alternatif/simpan', 'Umum::simpan');
 
 /*
  * --------------------------------------------------------------------

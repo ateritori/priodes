@@ -3,7 +3,7 @@
 <main class="container">
     <div class="bg-light p-5 rounded">
         <h1>Data Alternatif</h1>
-        <p class="lead"><a class="btn btn-primary btn-sm" href="<?= base_url(); ?>/alternatif/tambah" role="button"><i class="fa-solid fa-plus"></i> Alternatif</a></p>
+        <p class="lead"><a class="btn btn-primary btn-md" href="<?= base_url(); ?>/alternatif/tambah" role="button"><i class="fa-solid fa-plus"></i> Alternatif</a></p>
         <?php if (session()->getFlashdata('notif')) : ?>
             <p class="alert alert-success" role="alert">
                 <?= session()->getFlashdata('notif') ?>
@@ -16,8 +16,6 @@
                     <th scope="col">Program</th>
                     <th scope="col">Padukuhan</th>
                     <th scope="col">RT</th>
-                    <th scope="col">Dibuat</th>
-                    <th scope="col">Diubah</th>
                     <th scope="col">Aksi</th>
                 </tr>
             </thead>
@@ -31,8 +29,7 @@
                         <td><?= $alt['kegiatan']; ?></td>
                         <td><?= $alt['padukuhan']; ?></td>
                         <td><?= $alt['rt']; ?></td>
-                        <td><?= $alt['created_at']; ?></td>
-                        <td><?= $alt['updated_at']; ?></td>
+
                         <td>
                             <a href="<?= base_url(); ?>/alternatif/sub/<?= $alt['id_alternatif'] ?>" class="btn btn-info btn-sm"><i class="fa-solid fa-wave-square"></i></a>
                             <a href="<?= base_url(); ?>/alternatif/edit/<?= $alt['id_alternatif'] ?>" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>

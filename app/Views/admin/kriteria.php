@@ -3,7 +3,7 @@
 <main class="container">
     <div class="bg-light p-5 rounded">
         <h1>Data Kriteria</h1>
-        <p class="lead"><a class="btn btn-primary btn-sm" href="<?= base_url(); ?>/kriteria/tambah" role="button"><i class="fa-solid fa-plus"></i> Kriteria</a></p>
+        <p class="lead"><a class="btn btn-primary btn-md" href="<?= base_url(); ?>/kriteria/tambah" role="button"><i class="fa-solid fa-plus"></i> Kriteria</a></p>
         <?php if (session()->getFlashdata('notif')) : ?>
             <p class="alert alert-success" role="alert">
                 <?= session()->getFlashdata('notif') ?>

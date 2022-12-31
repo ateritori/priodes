@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 30, 2022 at 04:00 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Dec 31, 2022 at 04:31 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,20 +30,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `alternatif` (
   `id_alternatif` int(6) NOT NULL,
   `kegiatan` varchar(255) NOT NULL,
-  `padukuhan` varchar(24) NOT NULL,
-  `rt` int(2) NOT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  `deleted_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `padukuhan` int(3) NOT NULL,
+  `rt` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `alternatif`
 --
 
-INSERT INTO `alternatif` (`id_alternatif`, `kegiatan`, `padukuhan`, `rt`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Pembangunan Cor Rabat Beton', 'Madusari', 1, '2022-12-30 03:54:49', '2022-12-30 03:54:49', NULL),
-(2, 'Rehabilitasi Rumah Tidak Layak Huni', 'Tawarsari', 15, '2022-12-30 09:57:23', '2022-12-30 09:57:23', NULL);
+INSERT INTO `alternatif` (`id_alternatif`, `kegiatan`, `padukuhan`, `rt`) VALUES
+(1, 'Pembanguanan Jalan Usaha Tani (JUT)', 6, 7),
+(2, 'Momong Bareng', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -58,7 +55,7 @@ CREATE TABLE `kriteria` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `kriteria`
@@ -68,6 +65,69 @@ INSERT INTO `kriteria` (`id_kriteria`, `nama_kriteria`, `deskripsi_kriteria`, `c
 (1, 'Pengentasan Kemiskinan Ekstrem', 'Merupakan program pengentasan kemiskinan eksrem di desa Wonosari', '2022-12-27 18:58:11', '2022-12-28 15:47:43', NULL),
 (2, 'Peningkatan kualitas dan akses terhadap layanan dasar', 'Merupakan program untuk peningkatan kualitas dan akses layanan pendidikan, kesehatan dan infrastruktur', '2022-12-27 19:50:50', '2022-12-27 19:59:35', NULL),
 (3, 'Merupakan Kewenangan Desa', 'Program yang diusulkan merupakan kewenangan lokal desa', '2022-12-27 20:26:46', '2022-12-27 20:26:46', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `padukuhan`
+--
+
+CREATE TABLE `padukuhan` (
+  `id_padukuhan` int(3) NOT NULL,
+  `padukuhan` varchar(64) NOT NULL,
+  `deskripsi` varchar(255) NOT NULL,
+  `created_art` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `padukuhan`
+--
+
+INSERT INTO `padukuhan` (`id_padukuhan`, `padukuhan`, `deskripsi`, `created_art`, `updated_at`, `deleted_at`) VALUES
+(1, 'Madusari', 'Padukuhan Madusari', NULL, NULL, NULL),
+(2, 'Ringinsari', 'Padukuhan Ringinsari', NULL, NULL, NULL),
+(3, 'Purbosari', 'Padukuhan Purbosari', NULL, NULL, NULL),
+(4, 'Gadungsari', 'Padukuhan Gadungsari', NULL, NULL, NULL),
+(5, 'Pandansari', 'Padukuhan Pandansari', NULL, NULL, NULL),
+(6, 'Tawarsari', 'Padukuhan Tawarsari', NULL, NULL, NULL),
+(7, 'Jeruksari', 'Padukuhan Jeruksari', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rt`
+--
+
+CREATE TABLE `rt` (
+  `id_rt` int(3) NOT NULL,
+  `rt` varchar(4) NOT NULL,
+  `created_at` int(11) DEFAULT NULL,
+  `updated_at` int(11) DEFAULT NULL,
+  `deleted_at` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `rt`
+--
+
+INSERT INTO `rt` (`id_rt`, `rt`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '001', NULL, NULL, NULL),
+(2, '002', NULL, NULL, NULL),
+(3, '003', NULL, NULL, NULL),
+(4, '004', NULL, NULL, NULL),
+(5, '005', NULL, NULL, NULL),
+(6, '006', NULL, NULL, NULL),
+(7, '007', NULL, NULL, NULL),
+(8, '008', NULL, NULL, NULL),
+(9, '009', NULL, NULL, NULL),
+(10, '010', NULL, NULL, NULL),
+(11, '011', NULL, NULL, NULL),
+(12, '012', NULL, NULL, NULL),
+(13, '013', NULL, NULL, NULL),
+(14, '014', NULL, NULL, NULL),
+(15, '015', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -83,7 +143,7 @@ CREATE TABLE `sub_kriteria` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `sub_kriteria`
@@ -115,6 +175,18 @@ ALTER TABLE `kriteria`
   ADD PRIMARY KEY (`id_kriteria`);
 
 --
+-- Indexes for table `padukuhan`
+--
+ALTER TABLE `padukuhan`
+  ADD PRIMARY KEY (`id_padukuhan`);
+
+--
+-- Indexes for table `rt`
+--
+ALTER TABLE `rt`
+  ADD PRIMARY KEY (`id_rt`);
+
+--
 -- Indexes for table `sub_kriteria`
 --
 ALTER TABLE `sub_kriteria`
@@ -135,6 +207,18 @@ ALTER TABLE `alternatif`
 --
 ALTER TABLE `kriteria`
   MODIFY `id_kriteria` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `padukuhan`
+--
+ALTER TABLE `padukuhan`
+  MODIFY `id_padukuhan` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `rt`
+--
+ALTER TABLE `rt`
+  MODIFY `id_rt` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `sub_kriteria`

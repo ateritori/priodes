@@ -11,14 +11,14 @@ class AlternatifModel extends Model
     protected $useAutoIncrement = true;
     protected $allowedFields = ['kegiatan', 'padukuhan', 'rt'];
     // protected $returnType     = 'array';
-    protected $useSoftDeletes = true;
+    // protected $useSoftDeletes = true;
 
-    // Dates
-    protected $useTimestamps = true;
-    protected $dateFormat    = 'datetime';
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    //  Dates
+    // protected $useTimestamps = true;
+    // protected $dateFormat    = 'datetime';
+    // protected $createdField  = 'created_at';
+    // protected $updatedField  = 'updated_at';
+    // protected $deletedField  = 'deleted_at';
 
     // // Validation
     // protected $validationRules      = [];
@@ -37,11 +37,12 @@ class AlternatifModel extends Model
     // protected $beforeDelete   = [];
     // protected $afterDelete    = [];
 
-    public function getAlternatif($idAlternatif = false)
+    public function getAlternatif()
     {
-        if ($idAlternatif == false) {
-            return $this->findAll();
-        }
-        return $this->where(['id_kriteria' => $idAlternatif])->first();
+        $builder = $this->db->table('alternatif');
+        $builder->select('*');
+        $builder->join('padukuhan', 'alternatif.padukuhan = padukuhan.id_padukuhan');
+        $builder->join('rt', 'alternatif.rt = rt.id_rt');
+        return  $builder->get();
     }
 }
