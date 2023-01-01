@@ -9,16 +9,16 @@ class AlternatifModel extends Model
     protected $table      = 'alternatif';
     protected $primaryKey = 'id_alternatif';
     protected $useAutoIncrement = true;
-    protected $allowedFields = ['kegiatan', 'padukuhan', 'rt'];
+    protected $allowedFields = ['masalah', 'potensi', 'alternatif', 'padukuhan', 'rt', 'panjang', 'lebar', 'tinggi'];
     // protected $returnType     = 'array';
     // protected $useSoftDeletes = true;
 
     //  Dates
-    // protected $useTimestamps = true;
-    // protected $dateFormat    = 'datetime';
-    // protected $createdField  = 'created_at';
-    // protected $updatedField  = 'updated_at';
-    // protected $deletedField  = 'deleted_at';
+    protected $useTimestamps = true;
+    protected $dateFormat    = 'datetime';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+    protected $deletedField  = 'deleted_at';
 
     // // Validation
     // protected $validationRules      = [];
@@ -43,6 +43,7 @@ class AlternatifModel extends Model
         $builder->select('*');
         $builder->join('padukuhan', 'alternatif.padukuhan = padukuhan.id_padukuhan');
         $builder->join('rt', 'alternatif.rt = rt.id_rt');
+        $builder->where('alternatif.deleted_at', null);
         return  $builder->get();
     }
 }

@@ -16,6 +16,7 @@
                     <th scope="col">Program</th>
                     <th scope="col">Padukuhan</th>
                     <th scope="col">RT</th>
+                    <th scope="col">Dimensi</th>
                     <th scope="col">Aksi</th>
                 </tr>
             </thead>
@@ -26,10 +27,10 @@
                 ?>
                     <tr>
                         <th scope="row"><?= $no; ?></th>
-                        <td><?= $alt['kegiatan']; ?></td>
+                        <td><?= $alt['alternatif']; ?></td>
                         <td><?= $alt['padukuhan']; ?></td>
                         <td><?= $alt['rt']; ?></td>
-
+                        <td>P : <?= $alt['panjang']; ?>m | L : <?= $alt['lebar']; ?>m | T : <?= $alt['tinggi']; ?></td>
                         <td>
                             <a href="<?= base_url(); ?>/alternatif/sub/<?= $alt['id_alternatif'] ?>" class="btn btn-info btn-sm"><i class="fa-solid fa-wave-square"></i></a>
                             <a href="<?= base_url(); ?>/alternatif/edit/<?= $alt['id_alternatif'] ?>" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>

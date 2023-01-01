@@ -42,23 +42,59 @@ class Umum extends BaseController
     public function simpan()
     {
         if (!$this->validate([
-            'kegiatan' =>  [
+            'alternatif' =>  [
                 'rules' => 'required|is_unique[kriteria.nama_kriteria]',
                 'errors' => [
-                    'required' => 'Program/ Kegaiatan Harus Diisi',
+                    'required' => 'Program/ Kegiatan Harus Diisi',
                     'is_unique' => 'Program/ Kegiatan Sudah Ada'
                 ]
-            ]
-
+            ],
+            'panjang' =>  [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Panjang Harus Diisi',
+                    'numeric' => 'Panjang Harus Diisi Dengan Angka'
+                ]
+            ],
+            'lebar' =>  [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Lebar Harus Diisi',
+                    'numeric' => 'Lebar Harus Diisi Dengan Angka'
+                ]
+            ],
+            'tinggi' =>  [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Tinggi Harus Diisi',
+                    'numeric' => 'Tinggi Harus Diisi Dengan Angka'
+                ]
+            ],
+            'padukuhan' =>  [
+                'rules' => 'numeric',
+                'errors' => [
+                    'numeric' => 'Padukuhan Harus Dipilih'
+                ]
+            ],
+            'rt' =>  [
+                'rules' => 'numeric',
+                'errors' => [
+                    'numeric' => 'Padukuhan Harus Dipilih'
+                ]
+            ],
         ])) {
             $validation = \Config\Services::validation();
             return redirect()->to(base_url('alternatif/tambah'))->withInput()->with('validation', $validation);
         }
-        date_default_timezone_set('Asia/Jakarta');
         $this->AlternatifModel->save([
-            'kegiatan' => $this->request->getVar('kegiatan'),
+            'masalah' => $this->request->getVar('masalah'),
+            'potensi' => $this->request->getVar('potensi'),
+            'alternatif' => $this->request->getVar('alternatif'),
             'padukuhan' => $this->request->getVar('padukuhan'),
             'rt' => $this->request->getVar('rt'),
+            'panjang' => $this->request->getVar('panjang'),
+            'lebar' => $this->request->getVar('lebar'),
+            'tinggi' => $this->request->getVar('tinggi'),
         ]);
         session()->setFlashdata('notif', 'Data Alternatif Berhasil Ditambahkan');
         return redirect()->to(base_url('alternatif'));
