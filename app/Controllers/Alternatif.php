@@ -9,9 +9,11 @@ use \App\Models\RtModel;
 class Alternatif extends BaseController
 {
     protected $AlternatifModel;
+    protected $PadukuhanModel;
+    protected $RtModel;
+
     public function __construct()
     {
-        date_default_timezone_set('Asia/Jakarta');
         $this->AlternatifModel = new AlternatifModel();
         $this->PadukuhanModel = new PadukuhanModel();
         $this->RtModel = new RtModel();
@@ -21,13 +23,13 @@ class Alternatif extends BaseController
     {
         $data = [
             'judul' => 'Data Alternatrif - Wonosari',
-            'alternatif' => $this->AlternatifModel->getAlternatif()->getResultArray()
+            'alternatif' => $this->AlternatifModel->getAlternatif()
         ];
 
-        return view('alternatif', $data);
+        return view('alternatif/index', $data);
     }
 
-    public function tambah_alternatif()
+    public function create()
     {
         $data = [
             'judul' => 'Tambah Alternatrif - Wonosari',
@@ -36,55 +38,45 @@ class Alternatif extends BaseController
             'validation' => \Config\Services::validation()
         ];
 
-        return view('tambah_alternatif', $data);
+        return view('alternatif/create', $data);
     }
 
-    public function simpan()
+    public function save()
     {
         if (!$this->validate([
             'alternatif' =>  [
-                'rules' => 'required|is_unique[kriteria.nama_kriteria]',
+                'rules' => 'is_unique[kriteria.nama_kriteria]',
                 'errors' => [
-                    'required' => 'Program/ Kegiatan Harus Diisi',
                     'is_unique' => 'Program/ Kegiatan Sudah Ada'
                 ]
             ],
-            'panjang' =>  [
-                'rules' => 'required|numeric',
+            'paket' =>  [
+                'rules' => 'numeric',
                 'errors' => [
-                    'required' => 'Panjang Harus Diisi',
+                    'numeric' => 'Paket Harus Diisi Dengan Angka'
+                ]
+            ],
+            'panjang' =>  [
+                'rules' => 'numeric',
+                'errors' => [
                     'numeric' => 'Panjang Harus Diisi Dengan Angka'
                 ]
             ],
             'lebar' =>  [
-                'rules' => 'required|numeric',
+                'rules' => 'numeric',
                 'errors' => [
-                    'required' => 'Lebar Harus Diisi',
                     'numeric' => 'Lebar Harus Diisi Dengan Angka'
                 ]
             ],
             'tinggi' =>  [
-                'rules' => 'required|numeric',
+                'rules' => 'numeric',
                 'errors' => [
-                    'required' => 'Tinggi Harus Diisi',
                     'numeric' => 'Tinggi Harus Diisi Dengan Angka'
-                ]
-            ],
-            'padukuhan' =>  [
-                'rules' => 'numeric',
-                'errors' => [
-                    'numeric' => 'Padukuhan Harus Dipilih'
-                ]
-            ],
-            'rt' =>  [
-                'rules' => 'numeric',
-                'errors' => [
-                    'numeric' => 'Padukuhan Harus Dipilih'
                 ]
             ],
         ])) {
             $validation = \Config\Services::validation();
-            return redirect()->to(base_url('alternatif/tambah'))->withInput()->with('validation', $validation);
+            return redirect()->to('alternatif/create')->withInput()->with('validation', $validation);
         }
         $this->AlternatifModel->save([
             'masalah' => $this->request->getVar('masalah'),
@@ -92,11 +84,61 @@ class Alternatif extends BaseController
             'alternatif' => $this->request->getVar('alternatif'),
             'padukuhan' => $this->request->getVar('padukuhan'),
             'rt' => $this->request->getVar('rt'),
+            'paket' => $this->request->getVar('paket'),
             'panjang' => $this->request->getVar('panjang'),
             'lebar' => $this->request->getVar('lebar'),
             'tinggi' => $this->request->getVar('tinggi'),
         ]);
         session()->setFlashdata('notif', 'Data Alternatif Berhasil Ditambahkan');
         return redirect()->to(base_url('alternatif'));
+    }
+
+    public function edit($idAlternatif)
+    {
+        $data = [
+            'judul' => 'Ubah Alternatif - Wonosari',
+            'alternatif' => $this->AlternatifModel->getAlternatif($idAlternatif),
+            'padukuhan' => $this->PadukuhanModel->getPadukuhan(),
+            'rt' => $this->RtModel->getRt(),
+            'validation' => \Config\Services::validation()
+        ];
+
+        return view('alternatif/edit', $data);
+    }
+
+    public function update($idAlternatif)
+    {
+        $data = [
+            'masalah' => $this->request->getVar('masalah'),
+            'potensi' => $this->request->getVar('potensi'),
+            'alternatif' => $this->request->getVar('alternatif'),
+            'padukuhan' => $this->request->getVar('padukuhan'),
+            'rt' => $this->request->getVar('rt'),
+            'paket' => $this->request->getVar('paket'),
+            'panjang' => $this->request->getVar('panjang'),
+            'lebar' => $this->request->getVar('lebar'),
+            'tinggi' => $this->request->getVar('tinggi'),
+        ];
+        $this->AlternatifModel->update($idAlternatif, $data);
+
+        session()->setFlashdata('notif', 'Data Alternatif Berhasil Diubah');
+        return redirect()->to(base_url('alternatif'));
+    }
+
+    public function delete($idAlternatif)
+    {
+        $this->AlternatifModel->delete($idAlternatif);
+        session()->setFlashdata('notif', 'Data Alternatif Berhasil Dihapus');
+        return redirect()->to(base_url('alternatif'));
+    }
+
+    public function rinci($idAlternatif)
+    {
+        $data = [
+            'judul' => 'Data Alternatrif - Wonosari',
+            'alternatif' => $this->AlternatifModel->getAlternatif($idAlternatif)
+        ];
+
+        return view('alternatif/rinci', $data);
     }
 }

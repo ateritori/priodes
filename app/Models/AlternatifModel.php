@@ -9,9 +9,9 @@ class AlternatifModel extends Model
     protected $table      = 'alternatif';
     protected $primaryKey = 'id_alternatif';
     protected $useAutoIncrement = true;
-    protected $allowedFields = ['masalah', 'potensi', 'alternatif', 'padukuhan', 'rt', 'panjang', 'lebar', 'tinggi'];
-    // protected $returnType     = 'array';
-    // protected $useSoftDeletes = true;
+    protected $allowedFields = ['masalah', 'potensi', 'alternatif', 'padukuhan', 'rt', 'paket', 'panjang', 'lebar', 'tinggi'];
+    protected $returnType     = 'array';
+    protected $useSoftDeletes = true;
 
     //  Dates
     protected $useTimestamps = true;
@@ -37,13 +37,18 @@ class AlternatifModel extends Model
     // protected $beforeDelete   = [];
     // protected $afterDelete    = [];
 
-    public function getAlternatif()
+    public function getAlternatif($idAlternatif = false)
     {
         $builder = $this->db->table('alternatif');
         $builder->select('*');
         $builder->join('padukuhan', 'alternatif.padukuhan = padukuhan.id_padukuhan');
         $builder->join('rt', 'alternatif.rt = rt.id_rt');
         $builder->where('alternatif.deleted_at', null);
-        return  $builder->get();
+
+        if ($idAlternatif == false) :
+            return $builder->get()->getResultArray();
+        else :
+            return $builder->getWhere(['alternatif.id_alternatif' => $idAlternatif])->getRowArray();
+        endif;
     }
 }

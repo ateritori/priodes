@@ -51,9 +51,13 @@ $routes->get('/kriteria/sub/edit/(:num)', 'Subkriteria::edit/$1');
 $routes->get('/kriteria/sub/update/(:num)', 'Subkriteria::update/$1');
 $routes->delete('/kriteria/sub/delete/(:num)', 'Subkriteria::delete/$1');
 
-$routes->get('/alternatif', 'Umum::index');
-$routes->get('/alternatif/tambah', 'Umum::tambah_alternatif');
-$routes->get('/alternatif/simpan', 'Umum::simpan');
+$routes->get('/alternatif', 'Alternatif::index');
+$routes->get('/alternatif/(:num)', 'Alternatif::rinci/$1');
+$routes->get('/alternatif/create', 'Alternatif::create');
+$routes->get('/alternatif/save', 'Alternatif::save');
+$routes->get('/alternatif/edit/(:num)', 'Alternatif::edit/$1');
+$routes->get('/alternatif/update/(:num)', 'Alternatif::update/$1');
+$routes->delete('/alternatif/delete/(:num)', 'Alternatif::delete/$1');
 
 /*
  * --------------------------------------------------------------------
