@@ -6,7 +6,7 @@ use App\Models\AlternatifModel;
 use \App\Models\PadukuhanModel;
 use \App\Models\RtModel;
 
-class Umum extends BaseController
+class Alternatif extends BaseController
 {
     protected $AlternatifModel;
     public function __construct()

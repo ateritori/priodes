@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class SubkriteriaModel extends Model
+class SubModel extends Model
 {
     protected $table      = 'sub_kriteria';
     protected $primaryKey = 'id_sub_kriteria';

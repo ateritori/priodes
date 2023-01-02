@@ -35,19 +35,21 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Admin::index');
-$routes->get('/kriteria', 'Admin::kriteria');
-$routes->get('/kriteria/tambah', 'Admin::tambah');
-$routes->get('/kriteria/simpan', 'Admin::simpan');
-$routes->get('/kriteria/sub/(:num)', 'Admin::subkriteria/$1');
-$routes->get('/kriteria/edit/(:num)', 'Admin::edit/$1');
-$routes->get('/kriteria/update/(:num)', 'Admin::update/$1');
-$routes->delete('/kriteria/hapus/(:num)', 'Admin::hapus/$1');
-$routes->get('/kriteria/tambahsub/(:num)', 'Admin::tambahsub/$1');
-$routes->get('/kriteria/simpansub/(:num)', 'Admin::simpansub/$1');
-$routes->get('/kriteria/sub/edit/(:num)', 'Admin::editsub/$1');
-$routes->get('/kriteria/sub/editsub/(:num)', 'Admin::savesub/$1');
-$routes->delete('/kriteria/sub/hapus/(:num)', 'Admin::hapussub/$1');
+$routes->get('/', 'Beranda::index');
+
+$routes->get('/kriteria', 'Kriteria::index');
+$routes->get('/kriteria/tambah', 'Kriteria::create');
+$routes->get('/kriteria/simpan', 'Kriteria::save');
+$routes->get('/kriteria/edit/(:num)', 'Kriteria::edit/$1');
+$routes->get('/kriteria/update/(:num)', 'Kriteria::update/$1');
+$routes->delete('/kriteria/delete/(:num)', 'Kriteria::delete/$1');
+
+$routes->get('/kriteria/sub/(:num)', 'Subkriteria::index/$1');
+$routes->get('/kriteria/sub/create/(:num)', 'Subkriteria::create/$1');
+$routes->get('/kriteria/sub/save/(:num)', 'Subkriteria::save/$1');
+$routes->get('/kriteria/sub/edit/(:num)', 'Subkriteria::edit/$1');
+$routes->get('/kriteria/sub/update/(:num)', 'Subkriteria::update/$1');
+$routes->delete('/kriteria/sub/delete/(:num)', 'Subkriteria::delete/$1');
 
 $routes->get('/alternatif', 'Umum::index');
 $routes->get('/alternatif/tambah', 'Umum::tambah_alternatif');
