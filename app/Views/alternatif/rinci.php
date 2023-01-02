@@ -55,7 +55,8 @@
                 <td width=85%><?= $alternatif['tinggi']; ?> m</td>
             </tr>
         </table>
-        <a href="/alternatif" class="btn btn-secondary">Kembali</a>
+        <a href="/alternatif" class="btn btn-secondary btn-sm"><i class="fa-solid fa-arrow-left"></i>Kembali</a>
+        <a href="<?= base_url(); ?>/alternatif/edit/<?= $alternatif['id_alternatif'] ?>" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i>Edit</a>
     </div>
 </main>
 <?php $this->endSection(); ?>

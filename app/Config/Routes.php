@@ -59,6 +59,8 @@ $routes->get('/alternatif/edit/(:num)', 'Alternatif::edit/$1');
 $routes->get('/alternatif/update/(:num)', 'Alternatif::update/$1');
 $routes->delete('/alternatif/delete/(:num)', 'Alternatif::delete/$1');
 
+$routes->get('/penilaian', 'Penilaian::index');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

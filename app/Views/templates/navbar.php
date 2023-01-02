@@ -12,19 +12,19 @@
                     <a class="nav-link" aria-current="page" href="<?= base_url(); ?>">Beranda</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url(); ?>/kriteria">Kriteria</a>
+                    <a class="nav-link" href="/kriteria">Kriteria</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url(); ?>/alternatif">Alternatif</a>
+                    <a class="nav-link" href="/alternatif">Alternatif</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Penilaian</a>
+                    <a class="nav-link" href="/penilaian">Penilaian</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Analisis</a>
+                    <a class="nav-link" href="/analisis">Analisis</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Keluar</a>
+                    <a class="nav-link" href="/logout">Keluar</a>
                 </li>
             </ul>
             <a class="navbar-brand" href="#">Admin</a>
