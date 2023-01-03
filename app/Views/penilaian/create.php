@@ -12,11 +12,11 @@
             <tbody>
                 <?php
                 $no = 1;
-                foreach ($penilaian as $nilai) :
+                foreach ($alternatif as $alt) :
                 ?>
                     <tr>
                         <th scope="row" width=2%><?= $no; ?></th>
-                        <th colspan="2"><?= $nilai['alternatif']; ?></th>
+                        <th colspan="2"><?= $alt['alternatif']; ?></th>
                     </tr>
                     <?php
                     $no2 = 1;
@@ -26,9 +26,6 @@
                             <td></td>
                             <td width=1%><?= $no2; ?></td>
                             <td><?= $krt['deskripsi_kriteria'] ?></td>
-                            <?php
-                            $idKriteria = $krt['id_kriteria'];
-                            ?>
                             <?php
                             foreach ($subkriteria as $sub) :
                             ?>

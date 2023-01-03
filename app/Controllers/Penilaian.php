@@ -45,6 +45,7 @@ class Penilaian extends BaseController
             'judul' => 'Data Penilaian - Wonosari',
             'kriteria' => $this->KriteriaModel->getKriteria($idKriteria),
             'subkriteria' => $this->SubModel->getSubkriteria($idKriteria),
+            'alternatif' => $this->AlternatifModel->getAlternatif(),
             'penilaian' => $this->PenilaianModel->getPenilaian($idPenilaian)
         ];
 
