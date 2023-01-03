@@ -32,7 +32,7 @@
                         <td><?= $alt['rt']; ?></td>
                         <td><?= $alt['paket']; ?> Paket</td>
                         <td>
-                            <a href="/penilaian/<?= $alt['id_alternatif'] ?>" class="btn btn-info btn-sm"><i class="fa-solid fa-ranking-star"></i></a>
+                            <a href="/penilaian/<?= $alt['id_alternatif'] ?>" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
                         </td>
                     </tr>
                 <?php
