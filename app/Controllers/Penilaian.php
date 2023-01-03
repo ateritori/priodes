@@ -38,11 +38,11 @@ class Penilaian extends BaseController
 
         return view('penilaian/index', $data);
     }
-    
+
     public function create($idPenilaian = false, $idAlternatif = false, $idKriteria = false)
     {
         $data = [
-            'judul' => 'Data Penilaian - Wonosari',            
+            'judul' => 'Data Penilaian - Wonosari',
             'kriteria' => $this->KriteriaModel->getKriteria($idKriteria),
             'subkriteria' => $this->SubModel->getSubkriteria($idKriteria),
             'penilaian' => $this->PenilaianModel->getPenilaian($idPenilaian)
