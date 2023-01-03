@@ -39,7 +39,7 @@ class Penilaian extends BaseController
         return view('penilaian/index', $data);
     }
 
-    public function create($idPenilaian = false, $idAlternatif = false, $idKriteria = false)
+    public function create($idPenilaian = false, $idKriteria = false)
     {
         $data = [
             'judul' => 'Data Penilaian - Wonosari',
@@ -50,5 +50,11 @@ class Penilaian extends BaseController
         ];
 
         return view('penilaian/create', $data);
+    }
+
+    public function save()
+    {
+        $data = $this->request->getVar('inlineRadioOptions');
+        dd($data);
     }
 }
