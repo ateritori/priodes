@@ -3,6 +3,9 @@
 <main class="container">
     <div class="bg-light p-5 rounded">
         <h1>Data Penilaian</h1>
+        <?php foreach ($penilaian as $nilai) :?>
+        <p class="lead"><a class="btn btn-primary btn-md" href="/penilaian/create/" role="button"><i class="fa-solid fa-ranking-star"></i> Input Penilaian</a></p>
+        <?php endforeach; ?>
         <?php if (session()->getFlashdata('notif')) : ?>
             <p class="alert alert-success" role="alert">
                 <?= session()->getFlashdata('notif') ?>
@@ -31,7 +34,7 @@
                         <td><?= $alt['rt']; ?></td>
                         <td><?= $alt['paket']; ?> Paket</td>
                         <td>
-                            <a href="<?= base_url(); ?>/alternatif/edit/<?= $alt['id_alternatif'] ?>" class="btn btn-info btn-sm"><i class="fa-solid fa-ranking-star"></i></a>
+                            <a href="/penilaian/<?= $alt['id_alternatif'] ?>" class="btn btn-info btn-sm"><i class="fa-solid fa-ranking-star"></i></a>
                         </td>
                     </tr>
                 <?php
