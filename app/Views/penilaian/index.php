@@ -2,7 +2,12 @@
 <?= $this->section('content'); ?>
 <main class="container">
     <div class="bg-light p-5 rounded">
-        <h1>Data Penilaian</h1>        
+        <h1>Data Penilaian</h1>
+        <?php
+        foreach ($penilaian as $nilai) :
+            $idKriteria = $nilai ['id_kriteria'];
+        endforeach;
+        ?>        
         <p class="lead"><a class="btn btn-primary btn-md" href="/penilaian/create/" role="button"><i class="fa-solid fa-ranking-star"></i> Input Penilaian</a></p>        
         <?php if (session()->getFlashdata('notif')) : ?>
             <p class="alert alert-success" role="alert">
@@ -32,7 +37,7 @@
                         <td><?= $alt['rt']; ?></td>
                         <td><?= $alt['paket']; ?> Paket</td>
                         <td>
-                            <a href="/penilaian/<?= $alt['id_alternatif'] ?>" class="btn btn-info btn-sm"><i class="fa-solid fa-ranking-star"></i></a>
+                            <a href="/penilaian/<?= $alt['id_alternatif'] ?>" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
                         </td>
                     </tr>
                 <?php

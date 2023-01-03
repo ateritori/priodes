@@ -27,7 +27,7 @@
                             <td width=1%><?= $no2; ?></td>
                             <td><?= $krt['deskripsi_kriteria'] ?></td>
                             <?php
-                                $idKriteria = $krt['id_kriteria'];
+                                $idKriteria = $krt['id_kriteria'];                                
                             ?>
                             <?php
                                 foreach ($subkriteria as $sub) :                                    
