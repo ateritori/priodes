@@ -16,7 +16,7 @@
                 ?>
                     <tr>
                         <th scope="row" width=2%><?= $no; ?></th>
-                        <th colspan="2"><?= $alt['alternatif']; ?></th>
+                        <th colspan="7"><?= $alt['alternatif']; ?></th>
                     </tr>
                     <?php
                     $no2 = 1;
