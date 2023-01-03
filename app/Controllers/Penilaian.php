@@ -54,7 +54,7 @@ class Penilaian extends BaseController
 
     public function save()
     {
-        $data = $this->request->getVar('inlineRadioOptions');
+        $data = $this->request->getVar('bobot[]');
         dd($data);
     }
 }
