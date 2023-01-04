@@ -14,17 +14,15 @@
                 ?>
                 <form action="/penilaian/save">
                     <?php foreach ($alternatif as $alt) : ?>
-                        <input type="hidden" name="idAlternatif[]" value="<?= $alt['id_alternatif']; ?>">
                         <tr>
-                            <td><?= $no; ?></td>
-                            <td colspan="7"><?= $alt['alternatif']; ?></td>
+                            <th><?= $no; ?></th>
+                            <th colspan="7"><?= $alt['alternatif']; ?></th>
                         </tr>
                         <?php
                         $no++;
                         $no2 = 1;
                         foreach ($kriteria as $krt) :
                         ?>
-                            <input type="hidden" name="idKriteria[]" value="<?= $krt['id_kriteria']; ?>">
                             <tr>
                                 <td width=5%></td>
                                 <td width=5%><?= $no2; ?></td>
@@ -41,6 +39,7 @@
                                                     <?= $sub['nama_sub_kriteria']; ?>
                                                 </label>
                                             </div>
+                                            <input type="hidden" name="idKriteria[<?= $sub['id_kriteria']; ?>]" value="<?= $sub['id_kriteria']; ?>">
                                         </td>
                                 <?php
                                     endif;

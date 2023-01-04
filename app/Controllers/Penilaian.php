@@ -52,11 +52,16 @@ class Penilaian extends BaseController
         return view('penilaian/create', $data);
     }
 
-    public function save()
+    public function edit($idAlternatif = false, $idPenilaian = false, $idKriteria = false)
     {
-        $idKriteria = $this->request->getVar('idKriteria[]');
-        $idAlternatif = $this->request->getVar('idAlternatif[]');
-        $bobot = $this->request->getVar('bobot[]');
-        dd($idKriteria);
+        $data = [
+            'judul' => 'Data Penilaian - Wonosari',
+            'kriteria' => $this->KriteriaModel->getKriteria($idKriteria),
+            'subkriteria' => $this->SubModel->getSubkriteria($idKriteria),
+            'alternatif' => $this->AlternatifModel->getAlternatif($idAlternatif),
+            'penilaian' => $this->PenilaianModel->getPenilaian($idPenilaian)
+        ];
+
+        return view('penilaian/edit', $data);
     }
 }
