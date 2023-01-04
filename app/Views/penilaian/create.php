@@ -14,6 +14,7 @@
                 ?>
                 <form action="/penilaian/save">
                     <?php foreach ($alternatif as $alt) : ?>
+                        <input type="hidden" name="idAlternatif[]" value="<?= $alt['id_alternatif']; ?>">
                         <tr>
                             <td><?= $no; ?></td>
                             <td colspan="7"><?= $alt['alternatif']; ?></td>
@@ -23,6 +24,7 @@
                         $no2 = 1;
                         foreach ($kriteria as $krt) :
                         ?>
+                            <input type="hidden" name="idKriteria[]" value="<?= $krt['id_kriteria']; ?>">
                             <tr>
                                 <td width=5%></td>
                                 <td width=5%><?= $no2; ?></td>

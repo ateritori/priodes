@@ -54,7 +54,9 @@ class Penilaian extends BaseController
 
     public function save()
     {
-        $data = $this->request->getVar('bobot[]');
-        dd($data);
+        $idKriteria = $this->request->getVar('idKriteria[]');
+        $idAlternatif = $this->request->getVar('idAlternatif[]');
+        $bobot = $this->request->getVar('bobot[]');
+        dd($idKriteria);
     }
 }
