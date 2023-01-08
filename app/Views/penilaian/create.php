@@ -39,7 +39,8 @@
                                                     <?= $sub['nama_sub_kriteria']; ?>
                                                 </label>
                                             </div>
-                                            <input type="hidden" name="idKriteria[<?= $sub['id_kriteria']; ?>]" value="<?= $sub['id_kriteria']; ?>">
+                                            <input type="hidden" name="idKriteria[<?= $krt['id_kriteria']; ?>]" value="<?= $krt['id_kriteria']; ?>">
+                                            <input type="hidden" name="idAlternatif[<?= $alt['id_alternatif']; ?>]" value="<?= $alt['id_alternatif']; ?>">
                                         </td>
                                 <?php
                                     endif;
