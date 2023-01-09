@@ -65,19 +65,10 @@ class Penilaian extends BaseController
         return view('penilaian/edit', $data);
     }
 
-    public function update()
+    public function update($idAlternatif = false)
     {
-        $idkrit = $this->request->getVar('idkrit[]');
-        $data = [
-            'idAlternatif' => $this->request->getVar('idAlternatif'),
-            'bobot' => $this->request->getVar('bobot[]'),
-        ];
-        foreach ($idkrit as $idk) :
-            $this->PenilaianModel->save([
-                'id_alternatif' => $idAlternatif,
-                'id_kriteria' => $idkrit,
-                'bobot' => $bobot
-            ]);
-        endforeach;
+        $bobot = $this->request->getVar('bobot');
+        $idkrit2 = $this->request->getVar('idKriteria2');
+        var_dump($idkrit2);
     }
 }

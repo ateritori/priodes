@@ -3,46 +3,38 @@
 <main class="container">
     <div class="bg-light p-5 rounded">
         <h1><?= $alternatif['alternatif']; ?></h1>
-        <?php
-        $request = \Config\Services::request();
-        $idAlternatif = $request->uri->getSegment(2);
-        ?>
-        <form action="/penilaian/update/<?= $idAlternatif; ?>">
-            <input type="hidden" name="idAlternatif" value="<?= $idAlternatif; ?>">
+        <form action="/penilaian/update/<?= $alternatif['id_alternatif']; ?>">
+            <input type="hidden" name="idAlternatif" value="<?= $alternatif['id_alternatif']; ?>">
             <table class="table table-striped">
                 <thead>
                     <th width=5%>#</th>
                     <th colspan="7">Alternatif</th>
                 </thead>
                 <tbody>
-                    <?php foreach ($kriteria as $krt) : ?>
-                        <input type="hidden" name="idkrit[]" value="<?= $krt['id_kriteria']; ?>">
+                    <?php foreach ($kriteria as $krt => $value) : ?>
+                        <input type="hidden" name="idKriteria1[]" value="<?= $value['nama_kriteria']; ?>">
                         <tr>
-                            <td><?= $krt['id_kriteria']; ?></td>
-                            <td><?= $krt['deskripsi_kriteria']; ?></td>
-                            <?php foreach ($subkriteria as $subkrt) :
-                                if ($krt['id_kriteria'] == $subkrt['id_kriteria']) :
-                            ?>
-                                    <td>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="bobot[<?= $krt['id_kriteria']; ?>]" value="<?= $subkrt['bobot_sub_kriteria']; ?>">
-                                            <label class="form-check-label" for="bobot">
-                                                <?= $subkrt['nama_sub_kriteria']; ?>
-                                            </label>
-                                        </div>
-                                    </td>
-                            <?php
-                                endif;
-                            endforeach;
-                            ?>
+                            <td><?= $value['id_kriteria']; ?></td>
+                            <td><?= $value['nama_kriteria']; ?></td>
+                            <td>
+                                <?php
+                                foreach ($subkriteria as $subkrt) : ?>
+                                    <?php
+                                    if ($value['id_kriteria'] == $subkrt['id_kriteria']) :
+                                    ?>
+                                        <input type="hidden" name="idKriteria2[]" value="<?= $subkrt['id_kriteria']; ?>">
+                                        <input class="form-check-input" type="radio" name="bobot[<?= $value['id_kriteria']; ?>]" value="<?= $subkrt['bobot_sub_kriteria']; ?>">
+                                        <?= $subkrt['nama_sub_kriteria']; ?>
+                                <?php
+                                    endif;
+                                endforeach; ?>
+                            </td>
                         </tr>
-                    <?php
-                    endforeach;
-                    ?>
-
+                    <?php endforeach; ?>
                 </tbody>
             </table>
-            <button class="btn-primary btn-sm" type="submit">Update</button>
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="/penilaian" type="button" class="btn btn-secondary">Kembali</a>
         </form>
     </div>
 </main>
