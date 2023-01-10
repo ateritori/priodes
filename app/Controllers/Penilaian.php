@@ -45,11 +45,28 @@ class Penilaian extends BaseController
             'judul' => 'Data Penilaian - Wonosari',
             'kriteria' => $this->KriteriaModel->getKriteria($idKriteria),
             'subkriteria' => $this->SubModel->getSubkriteria($idKriteria),
-            'alternatif' => $this->AlternatifModel->getAlternatif(),
+            'alternatif' => $this->AlternatifModel->getAlternatif($idAlternatif),
             'penilaian' => $this->PenilaianModel->getPenilaian($idAlternatif)
         ];
 
         return view('penilaian/create', $data);
+    }
+
+    public function save($idAlternatif = false)
+    {
+        $idAlternatif = $this->request->getVar('idAlternatif');
+        $subKriteria = $this->request->getVar('subKriteria');
+        foreach ($subKriteria as $subKrit) :
+            $data = $this->SubModel->getSub($subKrit);
+            $this->PenilaianModel->save([
+                'id_alternatif' => $idAlternatif,
+                'id_kriteria' => $data['id_kriteria'],
+                'id_sub_kriteria' => $subKrit,
+                'nilai' => $data['bobot_sub_kriteria']
+            ]);
+        endforeach;
+        session()->setFlashdata('notif', 'Data Penilaian Berhasil Diisi');
+        return redirect()->to('/penilaian');
     }
 
     public function edit($idAlternatif = false, $idKriteria = false)
@@ -59,25 +76,9 @@ class Penilaian extends BaseController
             'kriteria' => $this->KriteriaModel->getKriteria($idKriteria),
             'subkriteria' => $this->SubModel->getSubkriteria($idKriteria),
             'alternatif' => $this->AlternatifModel->getAlternatif($idAlternatif),
-            'penilaian' => $this->PenilaianModel->getPenilaian($idAlternatif)
+            'penilaian' => $this->PenilaianModel->getNilai($idAlternatif)
         ];
 
         return view('penilaian/edit', $data);
-    }
-
-    public function update($idAlternatif = false)
-    {
-        $idAlternatif = $this->request->getVar('idAlternatif');
-        $subKriteria = $this->request->getVar('subKriteria');
-        foreach ($subKriteria as $subKrit) :
-            $data = $this->SubModel->getSub($subKrit);
-            $this->PenilaianModel->save([
-                'id_alternatif' => $idAlternatif,
-                'id_kriteria' => $data['id_kriteria'],
-                'nilai' => $data['bobot_sub_kriteria']
-            ]);
-        endforeach;
-        session()->setFlashdata('notif', 'Data Penilaian Berhasil Diisi');
-        return redirect()->to('/penilaian');
     }
 }

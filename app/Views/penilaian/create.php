@@ -2,59 +2,44 @@
 <?= $this->section('content'); ?>
 <main class="container">
     <div class="bg-light p-5 rounded">
-        <h1>Input Penilaian</h1>
-        <table class="table table-striped">
-            <thead>
-                <th width=5%>#</th>
-                <th colspan="7">Alternatif</th>
-            </thead>
-            <tbody>
-                <?php
-                $no = 1;
-                ?>
-                <form action="/penilaian/save">
-                    <?php foreach ($alternatif as $alt) : ?>
+        <h1><?= $alternatif['alternatif']; ?></h1>
+        <?php if (session()->getFlashdata('notif')) : ?>
+            <p class="alert alert-danger" role="alert">
+                <?= session()->getFlashdata('notif') ?>
+            </p>
+        <?php endif; ?>
+        <form action="/penilaian/save/<?= $alternatif['id_alternatif']; ?>">
+            <input type="hidden" name="idAlternatif" value="<?= $alternatif['id_alternatif']; ?>">
+            <table class="table table-striped">
+                <thead>
+                    <th width=5%>#</th>
+                    <th>Alternatif</th>
+                    <th colspan="6">Penilaian</th>
+                </thead>
+                <tbody>
+                    <?php foreach ($kriteria as $krt) : ?>
                         <tr>
-                            <th><?= $no; ?></th>
-                            <th colspan="7"><?= $alt['alternatif']; ?></th>
-                        </tr>
-                        <?php
-                        $no++;
-                        $no2 = 1;
-                        foreach ($kriteria as $krt) :
-                        ?>
-                            <tr>
-                                <td width=5%></td>
-                                <td width=5%><?= $no2; ?></td>
-                                <td><?= $krt['deskripsi_kriteria']; ?></td>
+                            <td><?= $krt['id_kriteria']; ?></td>
+                            <td><?= $krt['nama_kriteria']; ?></td>
+                            <td>
                                 <?php
-                                $no2++;
-                                foreach ($subkriteria as $sub) :
-                                    if ($krt['id_kriteria'] == $sub['id_kriteria']) :
-                                ?>
-                                        <td>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="bobot[<?= $alt['id_alternatif'] . $krt['id_kriteria'] ?>]" id="bobot" value="<?= $sub['bobot_sub_kriteria'] ?>">
-                                                <label class="form-check-label" for="bobot">
-                                                    <?= $sub['nama_sub_kriteria']; ?>
-                                                </label>
-                                            </div>
-                                            <input type="hidden" name="idKriteria[<?= $krt['id_kriteria']; ?>]" value="<?= $krt['id_kriteria']; ?>">
-                                            <input type="hidden" name="idAlternatif[<?= $alt['id_alternatif']; ?>]" value="<?= $alt['id_alternatif']; ?>">
-                                        </td>
+                                foreach ($subkriteria as $subkrt) : ?>
+                                    <?php
+                                    if ($krt['id_kriteria'] == $subkrt['id_kriteria']) :
+                                    ?>
+                                        <input class="form-check-input" type="radio" name="subKriteria[<?= $krt['id_kriteria']; ?>]" value="<?= $subkrt['id_sub_kriteria']; ?>" required>
+                                        <?= $subkrt['nama_sub_kriteria']; ?>
                                 <?php
                                     endif;
-                                endforeach;
-                                ?>
-                            </tr>
-                    <?php
-                        endforeach;
-                    endforeach;
-                    ?>
-                    <button type="submit">Simpan</button>
-                </form>
-            </tbody>
-        </table>
+                                endforeach; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+            <a href="/penilaian" type="button" class="btn btn-secondary">Kembali</a>
+        </form>
     </div>
 </main>
 <?php $this->endSection(); ?>

@@ -9,7 +9,7 @@ class PenilaianModel extends Model
     protected $table      = 'penilaian';
     protected $primaryKey = 'id_penilaian';
     protected $useAutoIncrement = true;
-    protected $allowedFields = ['id_alternatif', 'id_kriteria', 'nilai'];
+    protected $allowedFields = ['id_alternatif', 'id_kriteria', 'id_sub_kriteria', 'nilai'];
     protected $returnType     = 'array';
     protected $useSoftDeletes = true;
 
@@ -49,6 +49,21 @@ class PenilaianModel extends Model
             return $builder->get()->getResultArray();
         else :
             return $builder->getWhere(['penilaian.id_alternatif ' => $idAlternatif])->getRowArray();
+        endif;
+    }
+
+    public function getNilai($idAlternatif = false)
+    {
+        $builder = $this->db->table('penilaian');
+        $builder->select('*');
+        $builder->join('alternatif', 'penilaian.id_alternatif = alternatif.id_alternatif');
+        $builder->join('kriteria', 'penilaian.id_kriteria = kriteria.id_kriteria');
+        $builder->where('penilaian.deleted_at', null);
+
+        if ($idAlternatif == false) :
+            return $builder->get()->getResultArray();
+        else :
+            return $builder->getWhere(['penilaian.id_alternatif ' => $idAlternatif])->getResultArray();
         endif;
     }
 }

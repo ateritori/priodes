@@ -1,5 +1,7 @@
 <?= $this->extend('templates/index'); ?>
-<?= $this->section('content'); ?>
+<?= $this->section('content');
+
+?>
 <main class="container">
     <div class="bg-light p-5 rounded">
         <h1><?= $alternatif['alternatif']; ?></h1>
@@ -17,17 +19,28 @@
                     <th colspan="6">Penilaian</th>
                 </thead>
                 <tbody>
-                    <?php foreach ($kriteria as $krt) : ?>
+                    <?php
+                    foreach ($kriteria as $krt) :
+                    ?>
                         <tr>
                             <td><?= $krt['id_kriteria']; ?></td>
                             <td><?= $krt['nama_kriteria']; ?></td>
                             <td>
                                 <?php
-                                foreach ($subkriteria as $subkrt) : ?>
+                                foreach ($subkriteria as $subkrt) :
+                                ?>
                                     <?php
                                     if ($krt['id_kriteria'] == $subkrt['id_kriteria']) :
+                                        foreach ($penilaian as $penil) :
+                                            $nilai =  $penil['id_sub_kriteria'];
+                                            if ($subkrt['id_sub_kriteria'] == $nilai) :
+                                                $cek = 'checked';
+                                            else :
+                                                $cek = '';
+                                            endif;
+                                        endforeach;
                                     ?>
-                                        <input class="form-check-input" type="radio" name="subKriteria[<?= $krt['id_kriteria']; ?>]" value="<?= $subkrt['id_sub_kriteria']; ?>" required>
+                                        <input class="form-check-input" type="radio" name="subKriteria[<?= $krt['id_kriteria']; ?>]" value="<?= $subkrt['id_sub_kriteria']; ?>" <?= $cek; ?> required>
                                         <?= $subkrt['nama_sub_kriteria']; ?>
                                 <?php
                                     endif;

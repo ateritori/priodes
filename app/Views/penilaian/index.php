@@ -32,9 +32,15 @@ $this->PenilaianModel = new PenilaianModel();
                     $idAlternatif = $alt['id_alternatif'];
                     $cek = $this->PenilaianModel->getPenilaian($idAlternatif);
                     if ($cek == null) :
+                        $tambah = '';
                         $warna = 'info';
+                        $edit = 'disabled';
+                        $warna2 = 'secondary';
                     else :
-                        $warna = 'warning';
+                        $tambah = 'disabled';
+                        $warna = 'secondary';
+                        $edit = '';
+                        $warna2 = 'warning';
                     endif;
                 ?>
                     <tr>
@@ -44,7 +50,8 @@ $this->PenilaianModel = new PenilaianModel();
                         <td><?= $alt['rt']; ?></td>
                         <td><?= $alt['paket']; ?> Paket</td>
                         <td>
-                            <a href="/penilaian/<?= $alt['id_alternatif'] ?>" class="btn btn-<?= $warna; ?> btn-sm"><i class="fas fa-edit"></i></a>
+                            <a href="/penilaian/<?= $alt['id_alternatif'] ?>" class="btn btn-<?= $warna; ?> btn-sm <?= $tambah; ?>"><i class="fa-regular fa-square-plus"></i></a>
+                            <a href="/penilaian/edit/<?= $alt['id_alternatif'] ?>" class="btn btn-<?= $warna2; ?> btn-sm <?= $edit; ?>"><i class="fas fa-edit"></i></a>
                         </td>
                     </tr>
                 <?php

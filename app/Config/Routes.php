@@ -60,11 +60,9 @@ $routes->get('/alternatif/update/(:num)', 'Alternatif::update/$1');
 $routes->delete('/alternatif/delete/(:num)', 'Alternatif::delete/$1');
 
 $routes->get('/penilaian', 'Penilaian::index');
-$routes->get('/penilaian/create', 'Penilaian::create');
-$routes->get('/penilaian/save', 'Penilaian::save');
-$routes->get('/penilaian/(:num)', 'Penilaian::edit/$1');
-$routes->get('/penilaian/update/(:num)', 'Penilaian::update/$1');
-
+$routes->get('/penilaian/(:num)', 'Penilaian::create/$1');
+$routes->get('/penilaian/save/(:num)', 'Penilaian::save/$1');
+$routes->get('/penilaian/edit/(:num)', 'Penilaian::edit/$1');
 
 /*
  * --------------------------------------------------------------------
