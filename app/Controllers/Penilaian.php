@@ -28,38 +28,38 @@ class Penilaian extends BaseController
         $this->SubModel = new SubModel();
     }
 
-    public function index($idPenilaian = false)
+    public function index($idAlternatif = false)
     {
         $data = [
             'judul' => 'Data Penilaian - Wonosari',
             'alternatif' => $this->AlternatifModel->getAlternatif(),
-            'penilaian' => $this->PenilaianModel->getPenilaian($idPenilaian)
+            'penilaian' => $this->PenilaianModel->getPenilaian($idAlternatif)
         ];
 
         return view('penilaian/index', $data);
     }
 
-    public function create($idPenilaian = false, $idKriteria = false)
+    public function create($idAlternatif = false, $idKriteria = false)
     {
         $data = [
             'judul' => 'Data Penilaian - Wonosari',
             'kriteria' => $this->KriteriaModel->getKriteria($idKriteria),
             'subkriteria' => $this->SubModel->getSubkriteria($idKriteria),
             'alternatif' => $this->AlternatifModel->getAlternatif(),
-            'penilaian' => $this->PenilaianModel->getPenilaian($idPenilaian)
+            'penilaian' => $this->PenilaianModel->getPenilaian($idAlternatif)
         ];
 
         return view('penilaian/create', $data);
     }
 
-    public function edit($idAlternatif = false, $idPenilaian = false, $idKriteria = false)
+    public function edit($idAlternatif = false, $idKriteria = false)
     {
         $data = [
             'judul' => 'Data Penilaian - Wonosari',
             'kriteria' => $this->KriteriaModel->getKriteria($idKriteria),
             'subkriteria' => $this->SubModel->getSubkriteria($idKriteria),
             'alternatif' => $this->AlternatifModel->getAlternatif($idAlternatif),
-            'penilaian' => $this->PenilaianModel->getPenilaian($idPenilaian)
+            'penilaian' => $this->PenilaianModel->getPenilaian($idAlternatif)
         ];
 
         return view('penilaian/edit', $data);
@@ -67,8 +67,17 @@ class Penilaian extends BaseController
 
     public function update($idAlternatif = false)
     {
-        $bobot = $this->request->getVar('bobot');
-        $idkrit2 = $this->request->getVar('idKriteria2');
-        var_dump($idkrit2);
+        $idAlternatif = $this->request->getVar('idAlternatif');
+        $subKriteria = $this->request->getVar('subKriteria');
+        foreach ($subKriteria as $subKrit) :
+            $data = $this->SubModel->getSub($subKrit);
+            $this->PenilaianModel->save([
+                'id_alternatif' => $idAlternatif,
+                'id_kriteria' => $data['id_kriteria'],
+                'nilai' => $data['bobot_sub_kriteria']
+            ]);
+        endforeach;
+        session()->setFlashdata('notif', 'Data Penilaian Berhasil Diisi');
+        return redirect()->to('/penilaian');
     }
 }

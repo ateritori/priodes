@@ -37,7 +37,7 @@ class PenilaianModel extends Model
     // protected $beforeDelete   = [];
     // protected $afterDelete    = [];
 
-    public function getPenilaian($idPenilaian = false)
+    public function getPenilaian($idAlternatif = false)
     {
         $builder = $this->db->table('penilaian');
         $builder->select('*');
@@ -45,10 +45,10 @@ class PenilaianModel extends Model
         $builder->join('kriteria', 'penilaian.id_kriteria = kriteria.id_kriteria');
         $builder->where('penilaian.deleted_at', null);
 
-        if ($idPenilaian == false) :
+        if ($idAlternatif == false) :
             return $builder->get()->getResultArray();
         else :
-            return $builder->getWhere(['penilaian.id_penilaian' => $idPenilaian])->getRowArray();
+            return $builder->getWhere(['penilaian.id_alternatif ' => $idAlternatif])->getRowArray();
         endif;
     }
 }

@@ -1,5 +1,10 @@
 <?= $this->extend('templates/index'); ?>
-<?= $this->section('content'); ?>
+<?= $this->section('content');
+
+use \App\Models\PenilaianModel;
+
+$this->PenilaianModel = new PenilaianModel();
+?>
 <main class="container">
     <div class="bg-light p-5 rounded">
         <h1>Data Penilaian</h1>
@@ -24,6 +29,13 @@
                 <?php
                 $no = 1;
                 foreach ($alternatif as $alt) :
+                    $idAlternatif = $alt['id_alternatif'];
+                    $cek = $this->PenilaianModel->getPenilaian($idAlternatif);
+                    if ($cek == null) :
+                        $warna = 'info';
+                    else :
+                        $warna = 'warning';
+                    endif;
                 ?>
                     <tr>
                         <th scope="row"><?= $no; ?></th>
@@ -32,7 +44,7 @@
                         <td><?= $alt['rt']; ?></td>
                         <td><?= $alt['paket']; ?> Paket</td>
                         <td>
-                            <a href="/penilaian/<?= $alt['id_alternatif'] ?>" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
+                            <a href="/penilaian/<?= $alt['id_alternatif'] ?>" class="btn btn-<?= $warna; ?> btn-sm"><i class="fas fa-edit"></i></a>
                         </td>
                     </tr>
                 <?php
