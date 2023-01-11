@@ -25,7 +25,7 @@ $this->PenilaianModel = new PenilaianModel();
                     <?php
                     foreach ($kriteria as $krt) :
                     ?>
-                        <input type="hidden" name="$idKriteria" value="<?= $krt['id_kriteria']; ?>">
+                        <input type="hidden" name="idKriteria[]" value="<?= $krt['id_kriteria']; ?>">
                         <tr>
                             <td><?= $krt['id_kriteria']; ?></td>
                             <td><?= $krt['nama_kriteria']; ?></td>
