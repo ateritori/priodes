@@ -55,4 +55,9 @@ class PenilaianModel extends Model
             return $this->getWhere(['penilaian.id_alternatif ' => $idAlternatif])->getResultArray();
         endif;
     }
+
+    public function getHasil($idAlternatif, $idKriteria)
+    {
+        return $this->getWhere(['penilaian.id_alternatif ' => $idAlternatif, 'penilaian.id_kriteria' => $idKriteria])->getResultArray();
+    }
 }
