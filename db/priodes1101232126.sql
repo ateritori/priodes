@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 03, 2023 at 04:29 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Jan 11, 2023 at 03:26 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,7 +41,7 @@ CREATE TABLE `alternatif` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `alternatif`
@@ -49,13 +49,13 @@ CREATE TABLE `alternatif` (
 
 INSERT INTO `alternatif` (`id_alternatif`, `masalah`, `potensi`, `alternatif`, `padukuhan`, `rt`, `paket`, `panjang`, `lebar`, `tinggi`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Jalan Madusari Rusak Berat', 'Tenaga', 'Rehabilitasi Jalan Madusari', 1, 9, 1, 100, 3, 0, '2023-01-01 21:11:47', '2023-01-01 21:11:47', NULL),
-(2, 'Pengukuran Bayi Tidak Valid', 'KAder', 'Pengadaan Alat Ukur', 2, 1, 1, 0, 0, 0, '2023-01-01 21:12:47', '2023-01-01 21:12:47', NULL),
+(2, ' Pengukuran Bayi Tidak Valid', 'Pengukuran Bayi Tidak Valid', 'Pengadaan Alat Ukur Posyandu', 2, 1, 1, 0, 0, 0, '2023-01-01 21:12:47', '2023-01-10 15:35:10', NULL),
 (3, 'Tidak memiliki akses Jalan', 'Tenaga Kerja', 'Pembangunan Jalan Usaha Tani', 6, 8, 1, 100, 3, 0, '2023-01-02 21:52:48', '2023-01-02 21:52:48', NULL),
 (4, ' Rumah Bapak Suto Rusak', 'Rumah Bapak Suto Rusak', 'Rehabilitasi Rumah Tidak Layak Huni', 5, 9, 1, 0, 0, 0, '2023-01-02 22:03:37', '2023-01-02 23:12:53', NULL),
 (5, 'Honor Kader Kurang, Pekerjaan Banyak', 'SDM Kader Bagus', 'Penambahan Honor Hader', 8, 16, 144, 0, 0, 0, '2023-01-02 22:04:32', '2023-01-02 23:03:18', NULL),
 (6, 'Gedung Balai Padukuhan Rusak Ringan', 'Tenaga', 'Rehabilitasi Gedung Balai Padukuhan Gadungsari', 4, 6, 1, 0, 0, 0, '2023-01-02 22:05:42', '2023-01-02 23:04:34', NULL),
 (7, 'Printer Pelayanan Rusak', 'Tidak Punya', 'Pengadaan Printer', 8, 16, 5, 0, 0, 0, '2023-01-02 22:06:16', '2023-01-02 23:07:51', NULL),
-(8, 'Kelompok Gejog Lesung Tidak Aktif', 'Personil & Alat', 'Fasilitasi Latihan Gejog :Lesung', 7, 4, 4, 0, 0, 0, '2023-01-02 22:06:46', '2023-01-02 23:08:43', NULL);
+(8, ' Kelompok Gejog Lesung Tidak Aktif', 'Kelompok Gejog Lesung Tidak Aktif', 'Fasilitasi Latihan Gejog Lesung', 7, 4, 4, 0, 0, 0, '2023-01-02 22:06:46', '2023-01-03 22:47:16', NULL);
 
 -- --------------------------------------------------------
 
@@ -70,7 +70,7 @@ CREATE TABLE `kriteria` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `kriteria`
@@ -96,7 +96,7 @@ CREATE TABLE `padukuhan` (
   `created_art` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `padukuhan`
@@ -122,19 +122,48 @@ CREATE TABLE `penilaian` (
   `id_penilaian` int(6) NOT NULL,
   `id_alternatif` int(6) NOT NULL,
   `id_kriteria` int(6) NOT NULL,
+  `id_sub_kriteria` int(6) NOT NULL,
   `nilai` decimal(6,0) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `penilaian`
 --
 
-INSERT INTO `penilaian` (`id_penilaian`, `id_alternatif`, `id_kriteria`, `nilai`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 1, '5', '2023-01-03 08:39:32', '2023-01-03 08:40:40', NULL),
-(2, 2, 1, '5', '2023-01-03 09:33:48', '2023-01-03 09:33:48', NULL);
+INSERT INTO `penilaian` (`id_penilaian`, `id_alternatif`, `id_kriteria`, `id_sub_kriteria`, `nilai`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 1, 3, '3', '2023-01-11 17:01:53', '2023-01-11 17:03:59', NULL),
+(2, 1, 2, 8, '3', '2023-01-11 17:01:53', '2023-01-11 17:03:59', NULL),
+(3, 1, 3, 13, '3', '2023-01-11 17:01:53', '2023-01-11 17:03:59', NULL),
+(4, 1, 4, 18, '3', '2023-01-11 17:01:53', '2023-01-11 17:03:59', NULL),
+(5, 1, 5, 23, '3', '2023-01-11 17:01:53', '2023-01-11 17:03:59', NULL),
+(6, 2, 1, 5, '1', '2023-01-11 17:20:25', '2023-01-11 17:20:25', NULL),
+(7, 2, 2, 10, '1', '2023-01-11 17:20:25', '2023-01-11 17:20:25', NULL),
+(8, 2, 3, 15, '1', '2023-01-11 17:20:25', '2023-01-11 17:20:25', NULL),
+(9, 2, 4, 20, '1', '2023-01-11 17:20:25', '2023-01-11 17:20:25', NULL),
+(10, 2, 5, 25, '1', '2023-01-11 17:20:25', '2023-01-11 17:20:25', NULL),
+(11, 6, 1, 3, '3', '2023-01-11 17:21:28', '2023-01-11 17:21:28', NULL),
+(12, 6, 2, 8, '3', '2023-01-11 17:21:28', '2023-01-11 17:21:28', NULL),
+(13, 6, 3, 13, '3', '2023-01-11 17:21:28', '2023-01-11 17:21:28', NULL),
+(14, 6, 4, 18, '3', '2023-01-11 17:21:28', '2023-01-11 17:21:28', NULL),
+(15, 6, 5, 23, '3', '2023-01-11 17:21:28', '2023-01-11 17:21:28', NULL),
+(16, 3, 1, 1, '5', '2023-01-11 21:14:19', '2023-01-11 21:14:19', NULL),
+(17, 3, 2, 6, '5', '2023-01-11 21:14:19', '2023-01-11 21:14:19', NULL),
+(18, 3, 3, 11, '5', '2023-01-11 21:14:19', '2023-01-11 21:14:19', NULL),
+(19, 3, 4, 16, '5', '2023-01-11 21:14:19', '2023-01-11 21:14:19', NULL),
+(20, 3, 5, 21, '5', '2023-01-11 21:14:19', '2023-01-11 21:14:19', NULL),
+(21, 4, 1, 2, '4', '2023-01-11 21:14:27', '2023-01-11 21:14:27', NULL),
+(22, 4, 2, 7, '4', '2023-01-11 21:14:27', '2023-01-11 21:14:27', NULL),
+(23, 4, 3, 12, '4', '2023-01-11 21:14:27', '2023-01-11 21:14:27', NULL),
+(24, 4, 4, 17, '4', '2023-01-11 21:14:27', '2023-01-11 21:14:27', NULL),
+(25, 4, 5, 22, '4', '2023-01-11 21:14:27', '2023-01-11 21:14:27', NULL),
+(26, 5, 1, 4, '2', '2023-01-11 21:14:34', '2023-01-11 21:14:34', NULL),
+(27, 5, 2, 9, '2', '2023-01-11 21:14:34', '2023-01-11 21:14:34', NULL),
+(28, 5, 3, 14, '2', '2023-01-11 21:14:34', '2023-01-11 21:14:34', NULL),
+(29, 5, 4, 19, '2', '2023-01-11 21:14:34', '2023-01-11 21:14:34', NULL),
+(30, 5, 5, 24, '2', '2023-01-11 21:14:34', '2023-01-11 21:14:34', NULL);
 
 -- --------------------------------------------------------
 
@@ -148,7 +177,7 @@ CREATE TABLE `rt` (
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
   `deleted_at` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `rt`
@@ -186,7 +215,7 @@ CREATE TABLE `sub_kriteria` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `sub_kriteria`
@@ -285,7 +314,7 @@ ALTER TABLE `padukuhan`
 -- AUTO_INCREMENT for table `penilaian`
 --
 ALTER TABLE `penilaian`
-  MODIFY `id_penilaian` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_penilaian` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `rt`

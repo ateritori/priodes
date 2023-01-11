@@ -28,12 +28,12 @@ class Penilaian extends BaseController
         $this->SubModel = new SubModel();
     }
 
-    public function index($idAlternatif = false)
+    public function index()
     {
         $data = [
             'judul' => 'Data Penilaian - Wonosari',
             'alternatif' => $this->AlternatifModel->getAlternatif(),
-            'penilaian' => $this->PenilaianModel->getPenilaian($idAlternatif)
+            'penilaian' => $this->PenilaianModel->getPenilaian()
         ];
 
         return view('penilaian/index', $data);
@@ -69,14 +69,14 @@ class Penilaian extends BaseController
         return redirect()->to('/penilaian');
     }
 
-    public function edit($idAlternatif = false, $idKriteria = false, $idSub = false)
+    public function edit($idAlternatif = false, $idKriteria = false)
     {
         $data = [
             'judul' => 'Data Penilaian - Wonosari',
             'kriteria' => $this->KriteriaModel->getKriteria($idKriteria),
             'subkriteria' => $this->SubModel->getSubkriteria($idKriteria),
             'alternatif' => $this->AlternatifModel->getAlternatif($idAlternatif),
-            'penilaian' => $this->PenilaianModel->getNilai($idAlternatif, $idSub)
+            'penilaian' => $this->PenilaianModel->getNilai($idAlternatif)
         ];
 
         return view('penilaian/edit', $data);

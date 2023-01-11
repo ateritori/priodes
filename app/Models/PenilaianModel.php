@@ -39,31 +39,20 @@ class PenilaianModel extends Model
 
     public function getPenilaian($idAlternatif = false)
     {
-        $builder = $this->db->table('penilaian');
-        $builder->select('*');
-        $builder->join('alternatif', 'penilaian.id_alternatif = alternatif.id_alternatif');
-        $builder->join('kriteria', 'penilaian.id_kriteria = kriteria.id_kriteria');
-        $builder->where('penilaian.deleted_at', null);
 
         if ($idAlternatif == false) :
-            return $builder->get()->getResultArray();
+            return $this->findAll();
         else :
-            return $builder->getWhere(['penilaian.id_alternatif ' => $idAlternatif])->getRowArray();
+            return $this->getWhere(['penilaian.id_alternatif ' => $idAlternatif])->getRowArray();
         endif;
     }
 
     public function getNilai($idAlternatif = false)
     {
-        $builder = $this->db->table('penilaian');
-        $builder->select('*');
-        $builder->join('alternatif', 'penilaian.id_alternatif = alternatif.id_alternatif');
-        $builder->join('kriteria', 'penilaian.id_kriteria = kriteria.id_kriteria');
-        $builder->where('penilaian.deleted_at', null);
-
         if ($idAlternatif == false) :
-            return $builder->get()->getResultArray();
+            return $this->findAll();
         else :
-            return $builder->getWhere(['penilaian.id_alternatif ' => $idAlternatif])->getResultArray();
+            return $this->getWhere(['penilaian.id_alternatif ' => $idAlternatif])->getResultArray();
         endif;
     }
 }
