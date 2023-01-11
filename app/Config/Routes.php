@@ -63,6 +63,7 @@ $routes->get('/penilaian', 'Penilaian::index');
 $routes->get('/penilaian/(:num)', 'Penilaian::create/$1');
 $routes->get('/penilaian/save/(:num)', 'Penilaian::save/$1');
 $routes->get('/penilaian/edit/(:num)', 'Penilaian::edit/$1');
+$routes->get('/penilaian/update/(:num)', 'Penilaian::update/$1');
 
 /*
  * --------------------------------------------------------------------

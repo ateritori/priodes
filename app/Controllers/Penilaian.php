@@ -81,4 +81,20 @@ class Penilaian extends BaseController
 
         return view('penilaian/edit', $data);
     }
+
+    public function update($idAlternatif = false)
+    {
+        $idAlternatif = $this->request->getVar('idAlternatif');
+        $subKriteria = $this->request->getVar('subKriteria');
+        foreach ($subKriteria as $subKrit) :
+            $data = $this->SubModel->getSub($subKrit);
+            $bobot = $data['id_kriteria'];
+            echo $bobot . "<br>";
+        // $this->PenilaianModel->update($idAlternatif, [
+        //     'nilai' => $bobot,
+        // ]);
+        endforeach;
+        // session()->setFlashdata('notif', 'Data Penilaian Berhasil Diubah');
+        // return redirect()->to('/penilaian');
+    }
 }
