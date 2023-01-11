@@ -1,6 +1,9 @@
 <?= $this->extend('templates/index'); ?>
 <?= $this->section('content');
 
+use \App\Models\PenilaianModel;
+
+$this->PenilaianModel = new PenilaianModel();
 ?>
 <main class="container">
     <div class="bg-light p-5 rounded">
@@ -28,22 +31,26 @@
                             <td>
                                 <?php
                                 foreach ($subkriteria as $subkrt) :
+                                    $idsubKrt = $subkrt['id_sub_kriteria'];
+                                    $value = $this->PenilaianModel->getNilai($alternatif['id_alternatif']);
+                                    foreach ($value as $val) :
+                                        $idsubNilai = $val['id_sub_kriteria'];
+                                        if ($idsubKrt == $idsubNilai) :
+                                            $cek = 'checked';
+                                        else :
+                                            $cek = '';
+                                        endif;
                                 ?>
-                                    <?php
-                                    if ($krt['id_kriteria'] == $subkrt['id_kriteria']) :
-                                        foreach ($penilaian as $penil) :
-                                            $nilai =  $penil['id_sub_kriteria'];
-                                            if ($subkrt['id_sub_kriteria'] == $nilai) :
-                                                $cek = 'checked';
-                                            else :
-                                                $cek = '';
-                                            endif;
-                                        endforeach;
-                                    ?>
-                                        <input class="form-check-input" type="radio" name="subKriteria[<?= $krt['id_kriteria']; ?>]" value="<?= $subkrt['id_sub_kriteria']; ?>" <?= $cek; ?> required>
-                                        <?= $subkrt['nama_sub_kriteria']; ?>
+                                        <?php
+                                        if ($krt['id_kriteria'] == $subkrt['id_kriteria']) :
+                                            if ($val['id_kriteria'] == $subkrt['id_kriteria']) :
+                                        ?>
+                                                <input class="form-check-input" type="radio" name="subKriteria[<?= $krt['id_kriteria']; ?>]" value="<?= $subkrt['id_sub_kriteria']; ?>" <?= $cek; ?> required>
+                                                <?= $subkrt['nama_sub_kriteria']; ?>
                                 <?php
-                                    endif;
+                                            endif;
+                                        endif;
+                                    endforeach;
                                 endforeach; ?>
                             </td>
                         </tr>

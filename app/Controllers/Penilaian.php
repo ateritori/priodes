@@ -69,14 +69,14 @@ class Penilaian extends BaseController
         return redirect()->to('/penilaian');
     }
 
-    public function edit($idAlternatif = false, $idKriteria = false)
+    public function edit($idAlternatif = false, $idKriteria = false, $idSub = false)
     {
         $data = [
             'judul' => 'Data Penilaian - Wonosari',
             'kriteria' => $this->KriteriaModel->getKriteria($idKriteria),
             'subkriteria' => $this->SubModel->getSubkriteria($idKriteria),
             'alternatif' => $this->AlternatifModel->getAlternatif($idAlternatif),
-            'penilaian' => $this->PenilaianModel->getNilai($idAlternatif)
+            'penilaian' => $this->PenilaianModel->getNilai($idAlternatif, $idSub)
         ];
 
         return view('penilaian/edit', $data);
