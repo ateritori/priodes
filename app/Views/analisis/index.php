@@ -13,7 +13,7 @@ $this->PenilaianModel = new PenilaianModel();
             </li>
             <table class="table table-striped">
                 <thead>
-                    <tr align="center">
+                    <tr align="center" style="vertical-align: middle;">
                         <th width=5%>No.</th>
                         <th width=5%>Kode Alternatif</th>
                         <th width=30%>Alternatif</th>
@@ -32,8 +32,8 @@ $this->PenilaianModel = new PenilaianModel();
                     foreach ($alternatif as $alt) :
                     ?>
                         <tr>
-                            <td><?= $no; ?></td>
-                            <td>A<?= $alt['id_alternatif']; ?></td>
+                            <td align="center"><?= $no; ?></td>
+                            <td align="center">A<?= $alt['id_alternatif']; ?></td>
                             <td><?= $alt['alternatif']; ?></td>
                             <?php
                             foreach ($kriteria as $krt) :
