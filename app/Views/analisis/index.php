@@ -52,21 +52,47 @@ $this->PenilaianModel = new PenilaianModel();
                     ?>
                 </tbody>
             </table>
-            <li class="list-group-item">
-                <h5>2. KRITERIA KE-2</h5>
-            </li>
-            <li class="list-group-item">
-                <h5>3. KRITERIA KE-3</h5>
-            </li>
-            <li class="list-group-item">
-                <h5>4. KRITERIA KE-4</h5>
-            </li>
-            <li class="list-group-item">
-                <h5>5. KRITERIA KE-5</h5>
-            </li>
-            <li class="list-group-item">
-                <h5>6. KRITERIA KE-6</h5>
-            </li>
+            <?php
+            foreach ($alternatif as $alt) :
+            ?>
+                <table class="table table-striped">
+                    <thead>
+                        <tr align="center" style="vertical-align: middle;">
+                            <th width=5%>No.</th>
+                            <th width=5%>Perbandingan</th>
+                            <?php
+                            foreach ($kriteria as $krt) :
+                            ?>
+                                <th>K<?= $krt['id_kriteria']; ?></th>
+                            <?php
+                            endforeach;
+                            ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $dAlt = $this->PenilaianModel->getNilai($alt['id_alternatif']);
+                        $no = 1;
+                        $no2 = 2;
+                        foreach ($dAlt as $da) :
+                        ?>
+                            <tr>
+                                <td><?= $no; ?></td>
+                                <td>A<?= $da['id_alternatif']; ?>, A<?= $no2; ?></td>
+                            </tr>
+                        <?php
+                            $no++;
+                            $no2++;
+                        endforeach;
+                        ?>
+                        <li class="list-group-item">
+                            <h5>A<?= $alt['id_alternatif']; ?>. <?= $alt['alternatif']; ?></h5>
+                        </li>
+                    <?php
+                endforeach;
+                    ?>
+                    </tbody>
+                </table>
         </ul>
     </div>
 </main>
