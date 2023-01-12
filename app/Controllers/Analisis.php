@@ -28,14 +28,13 @@ class Analisis extends BaseController
         $this->SubModel = new SubModel();
     }
 
-    public function index($idAlternatif = false, $idKriteria = false)
+    public function index()
     {
         $data = [
             'judul' => 'Hasil Perhitungan - Wonosari',
             'kriteria' => $this->KriteriaModel->getKriteria(),
             'subkriteria' => $this->SubModel->getSub(),
             'alternatif' => $this->AlternatifModel->getAlternatif(),
-            'penilaian' => $this->PenilaianModel->getHasil($idAlternatif, $idKriteria)
         ];
 
         return view('analisis/index', $data);
