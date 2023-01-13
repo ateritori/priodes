@@ -109,11 +109,12 @@ $this->PenilaianModel = new PenilaianModel();
                                                 <td><?= $nl2['nilai']; ?>- <?= $nl['nilai']; ?> = <?= $nilai3; ?></td>
                                                 <td><?= $nilai4; ?></td>
                                     <?php
+                                                $nilai5 = $nilai4 + $nilai4;
                                             endforeach;
                                         endforeach;
                                     endforeach;
                                     ?>
-                                    <td>a</td>
+                                    <td><?= $nilai5 + $nilai4 ?></td>
                                 </tr>
                         <?php
                                 $no++;
