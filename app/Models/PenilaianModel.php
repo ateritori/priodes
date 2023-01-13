@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use mysqli;
 
 class PenilaianModel extends Model
 {
@@ -54,6 +55,11 @@ class PenilaianModel extends Model
         else :
             return $this->getWhere(['penilaian.id_alternatif ' => $idAlternatif])->getResultArray();
         endif;
+    }
+
+    public function totalAlt()
+    {
+        return $this->db->table('alternatif')->countAll();
     }
 
     public function getHasil($idAlternatif, $idKriteria)

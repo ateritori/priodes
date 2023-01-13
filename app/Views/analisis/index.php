@@ -55,35 +55,70 @@ $this->PenilaianModel = new PenilaianModel();
             <?php
             foreach ($alternatif as $alt) :
             ?>
-                <table class="table table-striped">
+                <table class="table table-bordered">
                     <thead>
                         <tr align="center" style="vertical-align: middle;">
-                            <th width=5%>No.</th>
-                            <th width=5%>Perbandingan</th>
+                            <th width=5% rowspan="2">No.</th>
+                            <th width=10% rowspan="2">Perbandingan</th>
                             <?php
                             foreach ($kriteria as $krt) :
                             ?>
-                                <th>K<?= $krt['id_kriteria']; ?></th>
+                                <th colspan="2">K<?= $krt['id_kriteria']; ?></th>
                             <?php
                             endforeach;
                             ?>
+                            <th rowspan="2">Indeks</th>
+                        </tr>
+                        <tr align="center">
+                            <th><i class="fa-solid fa-plus-minus"></i></th>
+                            <th><i class="fa-solid fa-indent"></i></th>
+                            <th><i class="fa-solid fa-plus-minus"></i></th>
+                            <th><i class="fa-solid fa-indent"></i></th>
+                            <th><i class="fa-solid fa-plus-minus"></i></th>
+                            <th><i class="fa-solid fa-indent"></i></th>
+                            <th><i class="fa-solid fa-plus-minus"></i></th>
+                            <th><i class="fa-solid fa-indent"></i></th>
+                            <th><i class="fa-solid fa-plus-minus"></i></th>
+                            <th><i class="fa-solid fa-indent"></i></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $dAlt = $this->PenilaianModel->getNilai($alt['id_alternatif']);
                         $no = 1;
-                        $no2 = 2;
-                        foreach ($dAlt as $da) :
+                        for ($i = 1; $i < ($total + 1); $i++) :
+                            if ($alt['id_alternatif'] != $i) :
                         ?>
-                            <tr>
-                                <td><?= $no; ?></td>
-                                <td>A<?= $da['id_alternatif']; ?>, A<?= $no2; ?></td>
-                            </tr>
+                                <tr align="center">
+                                    <td><?= $no; ?></td>
+                                    <td>A<?= $alt['id_alternatif']; ?>,
+                                        A<?= $i; ?>
+                                    </td>
+                                    <?php
+                                    foreach ($kriteria as $krt) :
+                                        $nilai1 = $this->PenilaianModel->getHasil($alt['id_alternatif'], $krt['id_kriteria']);
+                                        $nilai2 = $this->PenilaianModel->getHasil($i, $krt['id_kriteria']);
+                                        foreach ($nilai1 as $nl) :
+                                            foreach ($nilai2 as $nl2) :
+                                                $nilai3 = $nl2['nilai'] - $nl['nilai'];
+                                                if ($nilai3 < 0) :
+                                                    $nilai4 = 0;
+                                                else :
+                                                    $nilai4 = 1;
+                                                endif;
+                                    ?>
+                                                <td><?= $nl2['nilai']; ?>- <?= $nl['nilai']; ?> = <?= $nilai3; ?></td>
+                                                <td><?= $nilai4; ?></td>
+                                    <?php
+                                            endforeach;
+                                        endforeach;
+                                    endforeach;
+                                    ?>
+                                    <td>a</td>
+                                </tr>
                         <?php
-                            $no++;
-                            $no2++;
-                        endforeach;
+                                $no++;
+                            endif;
+                        endfor;
                         ?>
                         <li class="list-group-item">
                             <h5>A<?= $alt['id_alternatif']; ?>. <?= $alt['alternatif']; ?></h5>
