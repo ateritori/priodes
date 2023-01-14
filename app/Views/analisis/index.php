@@ -99,22 +99,22 @@ $this->PenilaianModel = new PenilaianModel();
                                         $nilai2 = $this->PenilaianModel->getHasil($i, $krt['id_kriteria']);
                                         foreach ($nilai1 as $nl) :
                                             foreach ($nilai2 as $nl2) :
-                                                $nilai3 = $nl2['nilai'] - $nl['nilai'];
+                                                $nilai3 = $nl['nilai'] - $nl2['nilai'];
                                                 if ($nilai3 < 0) :
                                                     $nilai4 = 0;
                                                 else :
                                                     $nilai4 = 1;
                                                 endif;
                                     ?>
-                                                <td><?= $nl2['nilai']; ?>- <?= $nl['nilai']; ?> = <?= $nilai3; ?></td>
+                                                <td><?= $nl['nilai']; ?> - <?= $nl2['nilai']; ?> = <?= $nilai3; ?></td>
                                                 <td><?= $nilai4; ?></td>
                                     <?php
-                                                $nilai5 = $nilai4 + $nilai4;
                                             endforeach;
                                         endforeach;
+                                        echo ($nilai4);
                                     endforeach;
                                     ?>
-                                    <td><?= $nilai5 + $nilai4 ?></td>
+                                    <td></td>
                                 </tr>
                         <?php
                                 $no++;
