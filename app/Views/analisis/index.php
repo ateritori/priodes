@@ -152,6 +152,7 @@ $this->PenilaianModel = new PenilaianModel();
                         </th>
                         <?php
                         $nilai7 = 0;
+                        $nilai9 = 0;
                         for ($i = 1; $i < ($total + 1); $i++) :
                             if ($alt['id_alternatif'] != $i) :
                                 $nilai5 = 0;
@@ -172,6 +173,7 @@ $this->PenilaianModel = new PenilaianModel();
                                     $nilai6 = (1 / $total) * $nilai5;
                                 endforeach;
                                 $nilai7 = $nilai6 + $nilai7;
+                                $nilai8 = (1 / ($total - 1)) * $nilai7;
                         ?>
                                 <td><?= $nilai6; ?></td>
                             <?php
@@ -180,13 +182,20 @@ $this->PenilaianModel = new PenilaianModel();
                                 <td>#</td>
                         <?php
                             endif;
+                            $nilai9 = $nilai9 + $nilai6;
                         endfor;
                         ?>
                         <td>
-                            <?= $nilai7; ?>
+                            <?= $nilai8; ?>
+                        </td>
+                        <td>
+                            <?= $nilai9; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
+                <tr align="center">
+                    <th>EntFlow</th>
+                </tr>
             </tbody>
         </table>
     </div>
