@@ -131,6 +131,9 @@ $this->PenilaianModel = new PenilaianModel();
                     ?>
                     </tbody>
                 </table>
+                <li class="list-group-item">
+                    <h5>HASIL ANALISA</h5>
+                </li>
         </ul>
     </div>
 </main>
