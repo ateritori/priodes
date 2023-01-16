@@ -35,7 +35,8 @@ class Analisis extends BaseController
             'kriteria' => $this->KriteriaModel->getKriteria(),
             'subkriteria' => $this->SubModel->getSub(),
             'alternatif' => $this->AlternatifModel->getAlternatif(),
-            'total' => $this->PenilaianModel->totalAlt()
+            'total' => $this->PenilaianModel->totalAlt(),
+            'totalkrit' => $this->KriteriaModel->totalKrit()
         ];
 
         return view('analisis/index', $data);

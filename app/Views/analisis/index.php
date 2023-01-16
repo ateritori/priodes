@@ -70,16 +70,10 @@ $this->PenilaianModel = new PenilaianModel();
                             <th rowspan="2">Indeks</th>
                         </tr>
                         <tr align="center">
-                            <th><i class="fa-solid fa-plus-minus"></i></th>
-                            <th><i class="fa-solid fa-equals"></i></th>
-                            <th><i class="fa-solid fa-plus-minus"></i></th>
-                            <th><i class="fa-solid fa-equals"></i></th>
-                            <th><i class="fa-solid fa-plus-minus"></i></th>
-                            <th><i class="fa-solid fa-equals"></i></th>
-                            <th><i class="fa-solid fa-plus-minus"></i></th>
-                            <th><i class="fa-solid fa-equals"></i></th>
-                            <th><i class="fa-solid fa-plus-minus"></i></th>
-                            <th><i class="fa-solid fa-equals"></i></th>
+                            <?php for ($h = 0; $h < $totalkrit; $h++) : ?>
+                                <th><i class="fa-solid fa-plus-minus"></i></th>
+                                <th><i class="fa-solid fa-equals"></i></th>
+                            <?php endfor; ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -137,7 +131,8 @@ $this->PenilaianModel = new PenilaianModel();
                 <table class="table table-bordered">
                     <tr align="center">
                         <th>#</th>
-                        <?php foreach ($alternatif as $alt) : ?>
+                        <?php foreach ($alternatif as $alt) :
+                        ?>
                             <th>A<?= $alt['id_alternatif']; ?></th>
                         <?php
                         endforeach;
@@ -147,15 +142,58 @@ $this->PenilaianModel = new PenilaianModel();
                         <th>NetFlow</th>
                         <th>Rank</th>
                     </tr>
-                    <?php foreach ($alternatif as $alt) : ?>
+                    <?php
+                    $nilai9 = 0;
+                    foreach ($alternatif as $alt) :
+                    ?>
                         <tr align="center">
                             <th>A<?= $alt['id_alternatif']; ?></th>
-
+                            <?php
+                            $nilai5 = 0;
+                            for ($i = 1; $i < ($total + 1); $i++) :
+                                if ($alt['id_alternatif'] != $i) :
+                                    $nilai7 = 0;
+                                    foreach ($kriteria as $krt) :
+                                        $nilai1 = $this->PenilaianModel->getHasil($alt['id_alternatif'], $krt['id_kriteria']);
+                                        $nilai2 = $this->PenilaianModel->getHasil($i, $krt['id_kriteria']);
+                                        foreach ($nilai1 as $nl) :
+                                            foreach ($nilai2 as $nl2) :
+                                                $nilai3 = $nl['nilai'] - $nl2['nilai'];
+                                                if ($nilai3 < 0) :
+                                                    $nilai4 = 0;
+                                                else :
+                                                    $nilai4 = 1;
+                                                endif;
+                                            endforeach;
+                                        endforeach;
+                                        $nilai5 = $nilai5 + $nilai4;
+                                        $nilai6 = (1 / $total) * $nilai5;
+                                    endforeach;
+                                    for ($i = 1; $i < ($total + 1); $i++) :
+                                        if ($alt['id_alternatif'] == $i) :
+                            ?>
+                                            <td>X</td>
+                                        <?php else : ?>
+                                            <td><?= $nilai6; ?></td>
+                            <?php
+                                            $nilai7 = $nilai7 + $nilai6;
+                                            $nilai8 = (1 / ($total - 1)) * $nilai7;
+                                        endif;
+                                    endfor;
+                                    $nilai9 = $nilai9 + $nilai6;
+                                endif;
+                            endfor;
+                            ?>
+                            <td><?= $nilai8; ?></td>
+                            <td><?= $nilai9; ?></td>
                         </tr>
-                    <?php endforeach ?>
+                    <?php
+                    endforeach ?>
                     <tr align="center">
                         <th>EFlow</th>
-                        <th></th>
+                        <?php for ($m = 0; $m < $total; $m++) : ?>
+                            <th></th>
+                        <?php endfor; ?>
                     </tr>
                 </table>
         </ul>

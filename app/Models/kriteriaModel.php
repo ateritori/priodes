@@ -27,4 +27,9 @@ class KriteriaModel extends Model
         }
         return $this->where(['id_kriteria' => $idKriteria])->first();
     }
+
+    public function totalKrit()
+    {
+        return $this->db->table('alternatif')->countAll();
+    }
 }
