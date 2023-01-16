@@ -55,6 +55,9 @@ $this->PenilaianModel = new PenilaianModel();
             <?php
             foreach ($alternatif as $alt) :
             ?>
+                <li class="list-group-item">
+                    <h5>A<?= $alt['id_alternatif'] . ". " .  $alt['alternatif']; ?></h5>
+                </li>
                 <table class="table table-bordered">
                     <thead>
                         <tr align="center" style="vertical-align: middle;">
@@ -117,86 +120,75 @@ $this->PenilaianModel = new PenilaianModel();
                             endif;
                         endfor;
                         ?>
-                        <li class="list-group-item">
-                            <h5>A<?= $alt['id_alternatif']; ?>. <?= $alt['alternatif']; ?></h5>
-                        </li>
-                    <?php
-                endforeach;
-                    ?>
                     </tbody>
                 </table>
-                <li class="list-group-item">
-                    <h5>HASIL ANALISIS</h5>
-                </li>
-                <table class="table table-bordered">
-                    <tr align="center">
-                        <th>#</th>
-                        <?php foreach ($alternatif as $alt) :
-                        ?>
-                            <th>A<?= $alt['id_alternatif']; ?></th>
-                        <?php
-                        endforeach;
-                        ?>
-                        <th>LFlow</th>
-                        <th>EFlow</th>
-                        <th>NetFlow</th>
-                        <th>Rank</th>
-                    </tr>
-                    <?php
-                    $nilai9 = 0;
-                    foreach ($alternatif as $alt) :
-                    ?>
-                        <tr align="center">
-                            <th>A<?= $alt['id_alternatif']; ?></th>
-                            <?php
-                            $nilai5 = 0;
-                            for ($i = 1; $i < ($total + 1); $i++) :
-                                if ($alt['id_alternatif'] != $i) :
-                                    $nilai7 = 0;
-                                    foreach ($kriteria as $krt) :
-                                        $nilai1 = $this->PenilaianModel->getHasil($alt['id_alternatif'], $krt['id_kriteria']);
-                                        $nilai2 = $this->PenilaianModel->getHasil($i, $krt['id_kriteria']);
-                                        foreach ($nilai1 as $nl) :
-                                            foreach ($nilai2 as $nl2) :
-                                                $nilai3 = $nl['nilai'] - $nl2['nilai'];
-                                                if ($nilai3 < 0) :
-                                                    $nilai4 = 0;
-                                                else :
-                                                    $nilai4 = 1;
-                                                endif;
-                                            endforeach;
-                                        endforeach;
-                                        $nilai5 = $nilai5 + $nilai4;
-                                        $nilai6 = (1 / $total) * $nilai5;
-                                    endforeach;
-                                    for ($i = 1; $i < ($total + 1); $i++) :
-                                        if ($alt['id_alternatif'] == $i) :
-                            ?>
-                                            <td>X</td>
-                                        <?php else : ?>
-                                            <td><?= $nilai6; ?></td>
-                            <?php
-                                            $nilai7 = $nilai7 + $nilai6;
-                                            $nilai8 = (1 / ($total - 1)) * $nilai7;
-                                        endif;
-                                    endfor;
-                                    $nilai9 = $nilai9 + $nilai6;
-                                endif;
-                            endfor;
-                            ?>
-                            <td><?= $nilai8; ?></td>
-                            <td><?= $nilai9; ?></td>
-                        </tr>
-                    <?php
-                    endforeach ?>
-                    <tr align="center">
-                        <th>EFlow</th>
-                        <?php for ($m = 0; $m < $total; $m++) : ?>
-                            <th></th>
-                        <?php endfor; ?>
-                    </tr>
-                </table>
+            <?php endforeach; ?>
+            <li class="list-group-item">
+                <h5>HASIL ANALISIS </h5>
+            </li>
         </ul>
+        <table class="table table-bordered">
+            <thead>
+                <tr align="center">
+                    <th>#</th>
+                    <?php
+                    for ($m = 1; $m <= $total; $m++) :
+                    ?>
+                        <th>A <?= $m; ?></th>
+                    <?php endfor; ?>
+                    <th>LFlow</th>
+                    <th>EntFlow</th>
+                    <th>NetFlow</th>
+                    <th>Rank</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($alternatif as $alt) :
+                ?>
+                    <tr align="center">
+                        <th>A
+                            <?= $alt['id_alternatif']; ?>
+                        </th>
+                        <?php
+                        $nilai7 = 0;
+                        for ($i = 1; $i < ($total + 1); $i++) :
+                            if ($alt['id_alternatif'] != $i) :
+                                $nilai5 = 0;
+                                foreach ($kriteria as $krt) :
+                                    $nilai1 = $this->PenilaianModel->getHasil($alt['id_alternatif'], $krt['id_kriteria']);
+                                    $nilai2 = $this->PenilaianModel->getHasil($i, $krt['id_kriteria']);
+                                    foreach ($nilai1 as $nl) :
+                                        foreach ($nilai2 as $nl2) :
+                                            $nilai3 = $nl['nilai'] - $nl2['nilai'];
+                                            if ($nilai3 < 0) :
+                                                $nilai4 = 0;
+                                            else :
+                                                $nilai4 = 1;
+                                            endif;
+                                        endforeach;
+                                    endforeach;
+                                    $nilai5 = $nilai5 + $nilai4;
+                                    $nilai6 = (1 / $total) * $nilai5;
+                                endforeach;
+                                $nilai7 = $nilai6 + $nilai7;
+                        ?>
+                                <td><?= $nilai6; ?></td>
+                            <?php
+                            else :
+                            ?>
+                                <td>#</td>
+                        <?php
+                            endif;
+                        endfor;
+                        ?>
+                        <td>
+                            <?= $nilai7; ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
 </main>
 <?php $this->endSection(); ?>
