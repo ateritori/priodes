@@ -71,15 +71,15 @@ $this->PenilaianModel = new PenilaianModel();
                         </tr>
                         <tr align="center">
                             <th><i class="fa-solid fa-plus-minus"></i></th>
-                            <th><i class="fa-solid fa-indent"></i></th>
+                            <th><i class="fa-solid fa-equals"></i></th>
                             <th><i class="fa-solid fa-plus-minus"></i></th>
-                            <th><i class="fa-solid fa-indent"></i></th>
+                            <th><i class="fa-solid fa-equals"></i></th>
                             <th><i class="fa-solid fa-plus-minus"></i></th>
-                            <th><i class="fa-solid fa-indent"></i></th>
+                            <th><i class="fa-solid fa-equals"></i></th>
                             <th><i class="fa-solid fa-plus-minus"></i></th>
-                            <th><i class="fa-solid fa-indent"></i></th>
+                            <th><i class="fa-solid fa-equals"></i></th>
                             <th><i class="fa-solid fa-plus-minus"></i></th>
-                            <th><i class="fa-solid fa-indent"></i></th>
+                            <th><i class="fa-solid fa-equals"></i></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -94,6 +94,7 @@ $this->PenilaianModel = new PenilaianModel();
                                         A<?= $i; ?>
                                     </td>
                                     <?php
+                                    $nilai5 = 0;
                                     foreach ($kriteria as $krt) :
                                         $nilai1 = $this->PenilaianModel->getHasil($alt['id_alternatif'], $krt['id_kriteria']);
                                         $nilai2 = $this->PenilaianModel->getHasil($i, $krt['id_kriteria']);
@@ -111,10 +112,11 @@ $this->PenilaianModel = new PenilaianModel();
                                     <?php
                                             endforeach;
                                         endforeach;
-                                        echo ($nilai4);
+                                        $nilai5 = $nilai5 + $nilai4;
+                                        $nilai6 = (1 / $total) * $nilai5;
                                     endforeach;
                                     ?>
-                                    <td></td>
+                                    <td><?= $nilai6; ?></td>
                                 </tr>
                         <?php
                                 $no++;

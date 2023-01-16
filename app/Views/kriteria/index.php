@@ -30,7 +30,7 @@
                         <td><?= $krt['deskripsi_kriteria']; ?></td>
                         <td><?= $krt['updated_at']; ?></td>
                         <td>
-                            <a href="/kriteria/sub/<?= $krt['id_kriteria'] ?>" class="btn btn-info btn-sm"><i class="fa-solid fa-wave-square"></i></a>
+                            <a href="/kriteria/sub/<?= $krt['id_kriteria'] ?>" class="btn btn-info btn-sm"><i class="fa-solid fa-ellipsis"></i></a>
                             <a href="/kriteria/edit/<?= $krt['id_kriteria'] ?>" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
                             <form action="/kriteria/delete/<?= $krt['id_kriteria'] ?>" method="POST" class="d-inline">
                                 <?= csrf_field(); ?>
