@@ -131,10 +131,22 @@ $this->PenilaianModel = new PenilaianModel();
                     ?>
                     </tbody>
                 </table>
-                <li class="list-group-item">
-                    <h5>HASIL ANALISA</h5>
-                </li>
                 <table class="table table-bordered">
+                    <tr align="center">
+                        <th></th>
+                        <?php foreach ($alternatif as $alt) : ?>
+                            <th>A<?= $alt['id_alternatif']; ?></th>
+                        <?php endforeach; ?>
+                        <th>LFlow</th>
+                        <th>EFlow</th>
+                        <th>NetFlow</th>
+                        <th>Rank</th>
+                    </tr>
+                    <?php foreach ($alternatif as $alt) : ?>
+                        <tr align="center">
+                            <th>A<?= $alt['id_alternatif']; ?></th>
+                        </tr>
+                    <?php endforeach ?>
                 </table>
         </ul>
     </div>
