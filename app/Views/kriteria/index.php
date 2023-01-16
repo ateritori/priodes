@@ -16,7 +16,7 @@
                     <th scope="col">Nama Kriteria</th>
                     <th scope="col">Deskripsi</th>
                     <th scope="col">Diubah</th>
-                    <th scope="col">Aksi</th>
+                    <th scope="col" width=15%>Aksi</th>
                 </tr>
             </thead>
             <tbody>

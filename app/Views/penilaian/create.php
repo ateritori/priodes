@@ -14,7 +14,7 @@
                 <thead>
                     <th width=5%>#</th>
                     <th>Alternatif</th>
-                    <th colspan="6">Penilaian</th>
+                    <th colspan="6" width=50%>Penilaian</th>
                 </thead>
                 <tbody>
                     <?php foreach ($kriteria as $krt) : ?>

@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="form-group mb-2">
-                <label for="bobot_sub_kriteria" class="form-label">Bobot Sub-Kriteria (1-10) :</label>
+                <label for="bobot_sub_kriteria" class="form-label">Bobot Sub-Kriteria (10-100) :</label>
                 <input type="text" class="form-control <?= ($validation->hasError('bobot_sub_kriteria')) ? 'is-invalid' : '' ?>" name="bobot_sub_kriteria" placeholder="Masukkan Bobot Sub-Kriteria" value="<?= old('bobot_sub_kriteria'); ?>" required>
                 <div class="invalid-feedback">
                     <?= $validation->getError('bobot_sub_kriteria'); ?>

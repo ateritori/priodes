@@ -42,7 +42,7 @@ class Subkriteria extends BaseController
     {
         if (!$this->validate([
             'bobot_sub_kriteria' =>  [
-                'rules' => 'numeric|less_than[11]',
+                'rules' => 'numeric|less_than[101]',
                 'errors' => [
                     'numeric' => 'Bobot Sub-Kriteria Harus Berupa Angka',
                     'less_than' => 'Bobot Sub-Kriteria Harus Diantara 1-10',
