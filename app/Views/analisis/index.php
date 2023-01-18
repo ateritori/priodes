@@ -144,7 +144,11 @@ $this->PenilaianModel = new PenilaianModel();
             </thead>
             <tbody>
                 <?php
+                $dataEntFlow = [];
+                $dataLFlow = [];
+                $z = 0;
                 foreach ($alternatif as $alt) :
+                    $dataEntFlow[$z] = [];
                 ?>
                     <tr align="center">
                         <th>A
@@ -175,16 +179,19 @@ $this->PenilaianModel = new PenilaianModel();
                                 $nilai8 = (1 / ($total - 1)) * $nilai7;
                         ?>
                                 <td><?= $nilai6; ?></td>
+                                <?php array_push($dataEntFlow[$z], $nilai6); ?>
                             <?php
                             else :
                             ?>
                                 <td>#</td>
+                                <?php array_push($dataEntFlow[$z], 0); ?>
                         <?php
                             endif;
                         endfor;
                         ?>
                         <td>
                             <?= $nilai8; ?>
+                            <?php array_push($dataLFlow, $nilai8); ?>
                         </td>
                         <td>
                             aaa
@@ -192,13 +199,35 @@ $this->PenilaianModel = new PenilaianModel();
                         <td>b</td>
                         <td>c</td>
                     </tr>
+
                 <?php
+                    $z++;
                 endforeach; ?>
                 <tr align="center">
                     <th>EntFlow</th>
-                    <?php for ($n = 1; $n <= $total; $n++) : ?>
-                        <th></th>
+
+                    <?php
+                    // inisialisasi array
+                    $jumlah = [];
+                    // membuat array sesuai jumlah kriteria
+                    for ($x = 0; $x < $total; $x++) {
+                        $jumlah[$x] = [];
+                    }
+                    // looping memasukkan nilai sesuai kode
+                    for ($y = 0; $y < count($dataEntFlow); $y++) : ?>
+                        <?php for ($x = 0; $x < count($dataEntFlow[$y]); $x++) : ?>
+                            <?php array_push($jumlah[$x], $dataEntFlow[$y][$x]) ?>
+                        <?php endfor; ?>
                     <?php endfor; ?>
+                    <?php
+                    // menampilkan jumlah
+                    for ($w = 0; $w < $total; $w++) {
+                        echo '<th>' . array_sum($jumlah[$w]) . '</th>';
+                    }
+                    ?>
+                    <th>
+                        <?= array_sum($dataLFlow) ?>
+                    </th>
                 </tr>
             </tbody>
         </table>
