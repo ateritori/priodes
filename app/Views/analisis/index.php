@@ -143,95 +143,21 @@ $this->PenilaianModel = new PenilaianModel();
                 </tr>
             </thead>
             <tbody>
-                <?php
-                $dataEntFlow = [];
-                $dataLFlow = [];
-                $z = 0;
-                foreach ($alternatif as $alt) :
-                    $dataEntFlow[$z] = [];
-                ?>
-                    <tr align="center">
-                        <th>A
-                            <?= $alt['id_alternatif']; ?>
-                        </th>
-                        <?php
-                        $nilai7 = 0;
-                        for ($i = 1; $i < ($total + 1); $i++) :
-                            if ($alt['id_alternatif'] != $i) :
-                                $nilai5 = 0;
-                                foreach ($kriteria as $krt) :
-                                    $nilai1 = $this->PenilaianModel->getHasil($alt['id_alternatif'], $krt['id_kriteria']);
-                                    $nilai2 = $this->PenilaianModel->getHasil($i, $krt['id_kriteria']);
-                                    foreach ($nilai1 as $nl) :
-                                        foreach ($nilai2 as $nl2) :
-                                            $nilai3 = $nl['nilai'] - $nl2['nilai'];
-                                            if ($nilai3 < 0) :
-                                                $nilai4 = 0;
-                                            else :
-                                                $nilai4 = 1;
-                                            endif;
-                                        endforeach;
-                                    endforeach;
-                                    $nilai5 = $nilai5 + $nilai4;
-                                    $nilai6 = (1 / $total) * $nilai5;
-                                endforeach;
-                                $nilai7 = $nilai6 + $nilai7;
-                                $nilai8 = (1 / ($total - 1)) * $nilai7;
-                        ?>
-                                <td><?= $nilai6; ?></td>
-                                <?php array_push($dataEntFlow[$z], $nilai6); ?>
-                            <?php
-                            else :
-                            ?>
-                                <td>#</td>
-                                <?php array_push($dataEntFlow[$z], 0); ?>
-                        <?php
-                            endif;
-                        endfor;
-                        ?>
-                        <td>
-                            <?= $nilai8; ?>
-                            <?php array_push($dataLFlow, $nilai8); ?>
-                        </td>
-                        <td>
-                            <?php
-                            // inisialisasi array
-                            $jumlah = [];
-                            // membuat array sesuai jumlah kriteria
-                            for ($x = 0; $x < $total; $x++) {
-                                $jumlah[$x] = [];
-                            }
-                            // looping memasukkan nilai sesuai kode
-                            for ($y = 0; $y < count($dataEntFlow); $y++) : ?>
-                                <?php for ($x = 0; $x < count($dataEntFlow[$y]); $x++) : ?>
-                                    <?php array_push($jumlah[$x], $dataEntFlow[$y][$x]) ?>
-                                <?php endfor; ?>
-                            <?php endfor; ?>
-                            <?php
-                            // menampilkan jumlah
-                            for ($w = 0; $w < $total; $w++) {
-                                $nilai9 = (1 / ($total - 1)) * (array_sum($jumlah[$w]));
-                                if ($alt['id_alternatif'] == $total) :
-                                    echo  $nilai9;
-                                endif;
-                            }
-                            ?>
-                        </td>
-                        <td><?= $alt['id_alternatif']; ?></td>
-                        <td></td>
+                <?php $i = 1;
+                foreach ($hasilAnalisis as $hasilAnalisis1) : ?>
+                    <tr>
+                        <td>A<?= $i++; ?></td>
+                        <?php foreach ($hasilAnalisis1 as $hasilAnalisis1) : ?>
+
+                            <td><?= $hasilAnalisis1; ?></td>
+                        <?php endforeach; ?>
                     </tr>
-                <?php
-                    $z++;
-                endforeach; ?>
-                <tr align="center">
-                    <th>EntFlow</th>
-                    <?php
-                    // menampilkan jumlah
-                    for ($w = 0; $w < $total; $w++) {
-                        $nilai9 = (1 / ($total - 1)) * (array_sum($jumlah[$w]));
-                        echo '<th>' . $nilai9 . '</th>';
-                    }
-                    ?>
+                <?php endforeach; ?>
+                <tr>
+                    <td>EntFlow</td>
+                    <?php for ($i = 0; $i < count($dataFlowKe); $i++) : ?>
+                        <td><?= array_sum($dataFlowKe[$i]); ?></td>
+                    <?php endfor; ?>
                 </tr>
             </tbody>
         </table>

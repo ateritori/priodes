@@ -89,15 +89,18 @@ class Analisis extends BaseController
             array_push($hasilAnalisis[$m], $nilai9);
         }
 
+        for ($n = 0; $n < count($hasilAnalisis); $n++) {
+            array_push($hasilAnalisis[$n], number_format($hasilAnalisis[$n][5], 2) - number_format($hasilAnalisis[$n][6], 2));
+        }
 
 
 
 
 
-        echo "<pre>";
-        var_dump($hasilAnalisis);
-        echo "</pre>";
-        die;
+        // echo "<pre>";
+        // var_dump($hasilAnalisis);
+        // echo "</pre>";
+        // die;
 
         $data = [
             'judul' => 'Hasil Perhitungan - Wonosari',
@@ -105,7 +108,9 @@ class Analisis extends BaseController
             'subkriteria' => $subKriteria,
             'alternatif' => $alternatif,
             'total' => $this->PenilaianModel->totalAlt(),
-            'totalkrit' => $this->KriteriaModel->totalKrit()
+            'totalkrit' => $this->KriteriaModel->totalKrit(),
+            'hasilAnalisis' => $hasilAnalisis,
+            'dataFlowKe' => $dataEntFlowKe,
         ];
 
         return view('analisis/index', $data);
