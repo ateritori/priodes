@@ -145,7 +145,7 @@ $this->PenilaianModel = new PenilaianModel();
             <tbody>
                 <?php $i = 1;
                 foreach ($hasilAnalisis as $hasilAnalisis1) : ?>
-                    <tr>
+                    <tr align="center">
                         <td>A<?= $i++; ?></td>
                         <?php foreach ($hasilAnalisis1 as $hasilAnalisis1) : ?>
 
@@ -153,10 +153,10 @@ $this->PenilaianModel = new PenilaianModel();
                         <?php endforeach; ?>
                     </tr>
                 <?php endforeach; ?>
-                <tr>
+                <tr align="center">
                     <td>EntFlow</td>
                     <?php for ($i = 0; $i < count($dataFlowKe); $i++) : ?>
-                        <td><?= array_sum($dataFlowKe[$i]); ?></td>
+                        <td><?= (1 / ($total - 1)) * (array_sum($dataFlowKe[$i])); ?></td>
                     <?php endfor; ?>
                 </tr>
             </tbody>

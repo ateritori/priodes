@@ -37,8 +37,6 @@ class Analisis extends BaseController
         $jumlahAlternatif = count($alternatif);
         $i = 0;
 
-
-
         foreach ($alternatif as $rowalternatif1) {
             $nilai7 = 0;
             $dataTabel = $dataEntFlow[$i] = [];
@@ -59,7 +57,7 @@ class Analisis extends BaseController
                             }
                         }
                         $nilai5 = $nilai5 + $nilai4;
-                        $nilai6 = (1 / $jumlahAlternatif) * $nilai5;
+                        $nilai6 = (1 / ($jumlahAlternatif)) * $nilai5;
                     }
                     array_push($dataTabel, $nilai6);
                     $nilai7 = $nilai6 + $nilai7;
@@ -92,10 +90,6 @@ class Analisis extends BaseController
         for ($n = 0; $n < count($hasilAnalisis); $n++) {
             array_push($hasilAnalisis[$n], number_format($hasilAnalisis[$n][5], 2) - number_format($hasilAnalisis[$n][6], 2));
         }
-
-
-
-
 
         // echo "<pre>";
         // var_dump($hasilAnalisis);
