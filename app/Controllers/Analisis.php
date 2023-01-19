@@ -30,11 +30,80 @@ class Analisis extends BaseController
 
     public function index()
     {
+        $alternatif = $this->AlternatifModel->getAlternatif();
+        $kriteria = $this->KriteriaModel->getKriteria();
+        $subKriteria = $this->SubModel->getSub();
+        $hasilAnalisis = $dataEntFlow = $dataEntFlowKe = $dataEntFlow = [];
+        $jumlahAlternatif = count($alternatif);
+        $i = 0;
+
+
+
+        foreach ($alternatif as $rowalternatif1) {
+            $nilai7 = 0;
+            $dataTabel = $dataEntFlow[$i] = [];
+            foreach ($alternatif as $rowalternatif2) {
+                if ($rowalternatif1['id_alternatif'] !== $rowalternatif2['id_alternatif']) {
+                    $nilai5 = 0;
+                    foreach ($kriteria as $rowkriteria) {
+                        $nilai1 = $this->PenilaianModel->getHasil($rowalternatif1['id_alternatif'], $rowkriteria['id_kriteria']);
+                        $nilai2 = $this->PenilaianModel->getHasil($rowalternatif2['id_alternatif'], $rowkriteria['id_kriteria']);
+                        foreach ($nilai1 as $rownilai1) {
+                            foreach ($nilai2 as $rownilai2) {
+                                $nilai3 = $rownilai1['nilai'] - $rownilai2['nilai'];
+                                if ($nilai3 < 0) {
+                                    $nilai4 = 0;
+                                } else {
+                                    $nilai4 = 1;
+                                }
+                            }
+                        }
+                        $nilai5 = $nilai5 + $nilai4;
+                        $nilai6 = (1 / $jumlahAlternatif) * $nilai5;
+                    }
+                    array_push($dataTabel, $nilai6);
+                    $nilai7 = $nilai6 + $nilai7;
+                    $nilai8 = (1 / ($jumlahAlternatif - 1)) * $nilai7;
+                } else {
+                    array_push($dataTabel, '#');
+                }
+            }
+            array_push($dataTabel, $nilai8);
+            array_push($hasilAnalisis, $dataTabel);
+            $i++;
+        }
+
+        // Mencari EntFLow
+        for ($j = 0; $j < $jumlahAlternatif; $j++) {
+            $dataEntFlowKe[$j] = [];
+        }
+
+        for ($k = 0; $k < count($hasilAnalisis); $k++) {
+            for ($l = 0; $l < $jumlahAlternatif; $l++) {
+                array_push($dataEntFlowKe[$l], $hasilAnalisis[$k][$l]);
+            }
+        }
+
+        for ($m = 0; $m < $jumlahAlternatif; $m++) {
+            $nilai9 = (1 / ($jumlahAlternatif - 1)) * (array_sum($dataEntFlowKe[$m]));
+            array_push($hasilAnalisis[$m], $nilai9);
+        }
+
+
+
+
+
+
+        echo "<pre>";
+        var_dump($hasilAnalisis);
+        echo "</pre>";
+        die;
+
         $data = [
             'judul' => 'Hasil Perhitungan - Wonosari',
-            'kriteria' => $this->KriteriaModel->getKriteria(),
-            'subkriteria' => $this->SubModel->getSub(),
-            'alternatif' => $this->AlternatifModel->getAlternatif(),
+            'kriteria' => $kriteria,
+            'subkriteria' => $subKriteria,
+            'alternatif' => $alternatif,
             'total' => $this->PenilaianModel->totalAlt(),
             'totalkrit' => $this->KriteriaModel->totalKrit()
         ];
