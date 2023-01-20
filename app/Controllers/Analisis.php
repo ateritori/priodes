@@ -95,8 +95,8 @@ class Analisis extends BaseController
         $dataNilai = [];
         for ($o = 0; $o < count($hasilAnalisis); $o++) {
             array_push($dataNilai, $hasilAnalisis[$o][7]);
-            arsort($dataNilai);
         }
+        arsort($dataNilai);
 
         for ($p = 0; $p < count($hasilAnalisis); $p++) {
             $rank = 1;
