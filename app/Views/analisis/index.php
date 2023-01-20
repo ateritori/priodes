@@ -148,7 +148,6 @@ $this->PenilaianModel = new PenilaianModel();
                     <tr align="center">
                         <td>A<?= $i++; ?></td>
                         <?php foreach ($hasilAnalisis1 as $hasilAnalisis1) : ?>
-
                             <td><?= $hasilAnalisis1; ?></td>
                         <?php endforeach; ?>
                     </tr>

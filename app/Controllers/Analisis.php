@@ -91,10 +91,22 @@ class Analisis extends BaseController
             array_push($hasilAnalisis[$n], number_format($hasilAnalisis[$n][5], 2) - number_format($hasilAnalisis[$n][6], 2));
         }
 
-        // echo "<pre>";
-        // var_dump($hasilAnalisis);
-        // echo "</pre>";
-        // die;
+        // rangking
+        $dataNilai = [];
+        for ($o = 0; $o < count($hasilAnalisis); $o++) {
+            array_push($dataNilai, $hasilAnalisis[$o][7]);
+            arsort($dataNilai);
+        }
+
+        for ($p = 0; $p < count($hasilAnalisis); $p++) {
+            $rank = 1;
+            foreach ($dataNilai as $key => $value) {
+                if ($p == $key) {
+                    array_push($hasilAnalisis[$p], $rank);
+                }
+                $rank++;
+            }
+        }
 
         $data = [
             'judul' => 'Hasil Perhitungan - Wonosari',
