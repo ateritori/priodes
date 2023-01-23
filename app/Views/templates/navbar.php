@@ -11,23 +11,33 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="<?= base_url(); ?>">Beranda</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/kriteria">Kriteria</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/alternatif">Alternatif</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/penilaian">Penilaian</a>
-                </li>
+                <?php if (in_groups('admin')) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/kriteria">Kriteria</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/alternatif">Alternatif</a>
+                    </li>
+                <?php endif; ?>
+                <?php if (in_groups('user')) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/penilaian">Penilaian</a>
+                    </li>
+                <?php endif; ?>
                 <li class="nav-item">
                     <a class="nav-link" href="/analisis">Analisis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/hasil">Hasil</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">Keluar</a>
                 </li>
             </ul>
-            <a class="navbar-brand" href="#">Admin</a>
+            <a class="navbar-brand" href="#"><?= user()->username; ?></a>
         </div>
     </div>
 </nav>

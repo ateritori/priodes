@@ -37,33 +37,33 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Beranda::index');
 
-$routes->get('/kriteria', 'Kriteria::index');
-$routes->get('/kriteria/tambah', 'Kriteria::create');
-$routes->get('/kriteria/simpan', 'Kriteria::save');
-$routes->get('/kriteria/edit/(:num)', 'Kriteria::edit/$1');
-$routes->get('/kriteria/update/(:num)', 'Kriteria::update/$1');
-$routes->delete('/kriteria/delete/(:num)', 'Kriteria::delete/$1');
+$routes->get('/kriteria', 'Kriteria::index', ['filter' => 'role:admin']);
+$routes->get('/kriteria/tambah', 'Kriteria::create', ['filter' => 'role:admin']);
+$routes->get('/kriteria/simpan', 'Kriteria::save', ['filter' => 'role:admin']);
+$routes->get('/kriteria/edit/(:num)', 'Kriteria::edit/$1', ['filter' => 'role:admin']);
+$routes->get('/kriteria/update/(:num)', 'Kriteria::update/$1', ['filter' => 'role:admin']);
+$routes->delete('/kriteria/delete/(:num)', 'Kriteria::delete/$1', ['filter' => 'role:admin']);
 
-$routes->get('/kriteria/sub/(:num)', 'Subkriteria::index/$1');
-$routes->get('/kriteria/sub/create/(:num)', 'Subkriteria::create/$1');
-$routes->get('/kriteria/sub/save/(:num)', 'Subkriteria::save/$1');
-$routes->get('/kriteria/sub/edit/(:num)', 'Subkriteria::edit/$1');
-$routes->get('/kriteria/sub/update/(:num)', 'Subkriteria::update/$1');
-$routes->delete('/kriteria/sub/delete/(:num)', 'Subkriteria::delete/$1');
+$routes->get('/kriteria/sub/(:num)', 'Subkriteria::index/$1', ['filter' => 'role:admin']);
+$routes->get('/kriteria/sub/create/(:num)', 'Subkriteria::create/$1', ['filter' => 'role:admin']);
+$routes->get('/kriteria/sub/save/(:num)', 'Subkriteria::save/$1', ['filter' => 'role:admin']);
+$routes->get('/kriteria/sub/edit/(:num)', 'Subkriteria::edit/$1', ['filter' => 'role:admin']);
+$routes->get('/kriteria/sub/update/(:num)', 'Subkriteria::update/$1', ['filter' => 'role:admin']);
+$routes->delete('/kriteria/sub/delete/(:num)', 'Subkriteria::delete/$1', ['filter' => 'role:admin']);
 
-$routes->get('/alternatif', 'Alternatif::index');
-$routes->get('/alternatif/(:num)', 'Alternatif::rinci/$1');
-$routes->get('/alternatif/create', 'Alternatif::create');
-$routes->get('/alternatif/save', 'Alternatif::save');
-$routes->get('/alternatif/edit/(:num)', 'Alternatif::edit/$1');
-$routes->get('/alternatif/update/(:num)', 'Alternatif::update/$1');
-$routes->delete('/alternatif/delete/(:num)', 'Alternatif::delete/$1');
+$routes->get('/alternatif', 'Alternatif::index', ['filter' => 'role:admin']);
+$routes->get('/alternatif/(:num)', 'Alternatif::rinci/$1', ['filter' => 'role:admin']);
+$routes->get('/alternatif/create', 'Alternatif::create', ['filter' => 'role:admin']);
+$routes->get('/alternatif/save', 'Alternatif::save', ['filter' => 'role:admin']);
+$routes->get('/alternatif/edit/(:num)', 'Alternatif::edit/$1', ['filter' => 'role:admin']);
+$routes->get('/alternatif/update/(:num)', 'Alternatif::update/$1', ['filter' => 'role:admin']);
+$routes->delete('/alternatif/delete/(:num)', 'Alternatif::delete/$1', ['filter' => 'role:admin']);
 
-$routes->get('/penilaian', 'Penilaian::index');
-$routes->get('/penilaian/(:num)', 'Penilaian::create/$1');
-$routes->get('/penilaian/save/(:num)', 'Penilaian::save/$1');
-$routes->get('/penilaian/edit/(:num)', 'Penilaian::edit/$1');
-$routes->get('/penilaian/update/(:num)', 'Penilaian::update/$1');
+$routes->get('/penilaian', 'Penilaian::index', ['filter' => 'role:user']);
+$routes->get('/penilaian/(:num)', 'Penilaian::create/$1', ['filter' => 'role:user']);
+$routes->get('/penilaian/save/(:num)', 'Penilaian::save/$1', ['filter' => 'role:user']);
+$routes->get('/penilaian/edit/(:num)', 'Penilaian::edit/$1', ['filter' => 'role:user']);
+$routes->get('/penilaian/update/(:num)', 'Penilaian::update/$1', ['filter' => 'role:user']);
 
 $routes->get('/analisis', 'Analisis::index');
 
