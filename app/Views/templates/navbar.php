@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <div class="container-fluid">
+    <div class="container">
         <a class="navbar-brand" href="<?= base_url(); ?>">
             SPK-PROMETHEE
         </a>
@@ -33,19 +33,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/hasil">Hasil</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout">Keluar</a>
-                </li>
             </ul>
         </div>
-        <li class="nav-item dropdown">
+        <div class="nav-item dropdown">
             <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <?= user()->nama; ?>
             </button>
             <ul class="dropdown-menu dropdown-menu-dark">
-                <li><a class="dropdown-item" href="/logout">Log Out</a></li>
+                <li><a class="dropdown-item" href="/logout">Keluar</a></li>
             </ul>
-        </li>
-
+        </div>
     </div>
 </nav>
