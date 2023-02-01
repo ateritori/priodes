@@ -66,6 +66,7 @@ $routes->get('/penilaian/edit/(:num)', 'Penilaian::edit/$1', ['filter' => 'role:
 $routes->get('/penilaian/update/(:num)', 'Penilaian::update/$1', ['filter' => 'role:user']);
 
 $routes->get('/analisis', 'Analisis::index');
+$routes->get('/hasil', 'Hasil::index');
 
 /*
  * --------------------------------------------------------------------
