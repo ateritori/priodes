@@ -9,7 +9,7 @@
                 <?= session()->getFlashdata('notif') ?>
             </p>
         <?php endif; ?>
-        <table class="table table-striped">
+        <table class="table table-striped" id="alternatif">
             <thead>
                 <tr>
                     <th scope="col">#</th>

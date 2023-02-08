@@ -14,6 +14,10 @@
     <link href="<?= base_url(); ?>/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?= base_url(); ?>/fontawesome/css/all.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/b-2.3.4/b-colvis-2.3.4/b-html5-2.3.4/b-print-2.3.4/fc-4.2.1/r-2.4.0/datatables.min.css" />
+
+
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -78,6 +82,57 @@
     <?= $this->renderSection('content'); ?>
 
     <script src="<?= base_url(); ?>/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/jszip-2.5.0/dt-1.13.2/b-2.3.4/b-html5-2.3.4/b-print-2.3.4/fc-4.2.1/r-2.4.0/datatables.min.js"></script>
+
+
+    <script>
+        $("#kriteria").DataTable({
+            "pageLength": 5,
+            "paging": true,
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": true,
+            "ordering": true,
+            "info": true,
+            "buttons": ["excel", "pdf", "print"],
+        }).buttons().container().appendTo('#kriteria_wrapper .col-md-6:eq(0)');
+
+        $("#alternatif").DataTable({
+            "pageLength": 5,
+            "paging": true,
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": true,
+            "ordering": true,
+            "info": true,
+            "buttons": ["excel", "pdf", "print"],
+        }).buttons().container().appendTo('#alternatif_wrapper .col-md-6:eq(0)');
+
+        $("#subkriteria").DataTable({
+            "pageLength": 5,
+            "paging": true,
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": true,
+            "ordering": true,
+            "info": true,
+            "buttons": ["excel", "pdf", "print"],
+        }).buttons().container().appendTo('#subkriteria_wrapper .col-md-6:eq(0)');
+
+        $("#hasil").DataTable({
+            "pageLength": 5,
+            "paging": true,
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": true,
+            "ordering": true,
+            "info": true,
+            "buttons": ["excel", "pdf", "print"],
+        }).buttons().container().appendTo('#hasil_wrapper .col-md-6:eq(0)');
+    </script>
+
 </body>
 
 </html>

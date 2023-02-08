@@ -13,7 +13,7 @@
                 <?= session()->getFlashdata('notif'); ?>
             </p>
         <?php endif; ?>
-        <table class="table table-striped">
+        <table class="table table-striped" id="subkriteria">
             <thead>
                 <tr>
                     <th scope="col">#</th>
